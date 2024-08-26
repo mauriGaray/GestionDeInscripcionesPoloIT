@@ -3,6 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const methodOverride = require("method-override");
 const path = require("path");
+const { error404, error500 } = require("./src/controllers/errorController");
 
 // Inicializar aplicación Express
 const app = express();
@@ -14,6 +15,7 @@ const PORT = 3000;
 const egresadoRoutes = require("./src/routes/egresadoRoutes");
 const mentorRoutes = require("./src/routes/mentorRoutes");
 const adminRoutes = require("./src/routes/adminRoutes");
+
 // Middleware para procesar datos de formularios y peticiones JSON
 app.use(express.urlencoded({ extended: true })); // Para procesar datos de formularios
 app.use(express.json()); // Para parsear el cuerpo de peticiones POST en formato JSON
@@ -28,15 +30,13 @@ app.use(cors());
 app.use(express.static("public"));
 app.use(express.static(path.resolve(__dirname, "public")));
 
-// Rutas
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
-
 // Rutas de API
 app.use("/api/v0/egresado", egresadoRoutes);
 app.use("/api/v0/mentor", mentorRoutes);
 app.use("/api/v0/admin", adminRoutes);
+app.use(error404);
+app.use(error500);
+
 // Inicialización del servidor
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

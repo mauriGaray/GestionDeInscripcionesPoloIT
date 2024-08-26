@@ -1,19 +1,43 @@
+// Importar módulos
 const express = require("express");
+const cors = require("cors");
+const methodOverride = require("method-override");
+const path = require("path");
 
+// Inicializar aplicación Express
 const app = express();
+
+// Configuración del puerto
 const PORT = 3000;
 
-const handleUnknownEndpoint = (request, response) => {
-  response.status(404).json({ error: "unknown endpoint" });
-};
+// Importar rutas
+const egresadoRoutes = require("./src/routes/egresadoRoutes");
+const mentorRoutes = require("./src/routes/mentorRoutes");
+const adminRoutes = require("./src/routes/adminRoutes");
+// Middleware para procesar datos de formularios y peticiones JSON
+app.use(express.urlencoded({ extended: true })); // Para procesar datos de formularios
+app.use(express.json()); // Para parsear el cuerpo de peticiones POST en formato JSON
 
-app.use(express.json());
-app.get("/", (request, response) => {
-  response.send("<h1>Hello World!</h1>");
+// Middleware para habilitar otros métodos HTTP como PUT y DELETE
+app.use(methodOverride("_method"));
+
+// Middleware para habilitar CORS
+app.use(cors());
+
+// Configuración de archivos estáticos
+app.use(express.static("public"));
+app.use(express.static(path.resolve(__dirname, "public")));
+
+// Rutas
+app.get("/", (req, res) => {
+  res.send("Hello World!");
 });
 
+// Rutas de API
+app.use("/api/v0/egresado", egresadoRoutes);
+app.use("/api/v0/mentor", mentorRoutes);
+app.use("/api/admin", adminRoutes);
+// Inicialización del servidor
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
-
-app.use(handleUnknownEndpoint);

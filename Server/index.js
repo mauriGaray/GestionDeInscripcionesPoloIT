@@ -36,7 +36,7 @@ app.get("/", (req, res) => {
 // Rutas de API
 app.use("/api/v0/egresado", egresadoRoutes);
 app.use("/api/v0/mentor", mentorRoutes);
-app.use("/api/admin", adminRoutes);
+app.use("/api/v0/admin", adminRoutes);
 // Inicialización del servidor
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

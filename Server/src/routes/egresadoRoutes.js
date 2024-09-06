@@ -1,22 +1,20 @@
 const express = require("express");
 const router = express.Router();
+const egresadoController = require("../controllers/egresadosController");
 
-//Routes
+// Crear un nuevo egresado
+router.post("/", egresadoController.createEgresado);
 
-//Perfil
-router.get("/perfil", (req, res) => {
-  res.send("Perfil del egresado");
-}); // para mostrar el perfil
-router.put("/perfil", (req, res) => {
-  res.send("Actualizando perfil");
-}); // para actualizar el perfil
-//Proyectos
-router.get("/proyecto", (req, res) => {
-  res.send("Proyecto del egresado");
-}); // para mostrar el proyecto en el que esta inscrito el egresado
-//Mentor
-router.get("/mentor", (req, res) => {
-  res.send("Mentor del egresado");
-}); // para mostrar el mentor del egresado
+// Obtener todos los egresados
+router.get("/", egresadoController.getAllEgresados);
+
+// Obtener un egresado por documento
+router.get("/:documento", egresadoController.getEgresadoByDocumento);
+
+// Actualizar un egresado por documento
+router.put("/:documento", egresadoController.updateEgresado);
+
+// Eliminar un egresado por documento
+router.delete("/:documento", egresadoController.deleteEgresado);
 
 module.exports = router;

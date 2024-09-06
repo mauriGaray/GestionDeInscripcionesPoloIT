@@ -1,24 +1,20 @@
 const express = require("express");
 const router = express.Router();
+const mentorController = require("../controllers/mentorController");
 
-//Routes
+// Crear un nuevo mentor
+router.post("/", mentorController.createMentor);
 
-//Perfil
-router.get("/perfil", (req, res) => {
-  res.send("Perfil del mentor");
-}); // para mostrar el perfil
-router.put("/perfil", (req, res) => {
-  res.send("Actualizando perfil");
-}); // para actualizar el perfil
+// Obtener todos los mentores
+router.get("/", mentorController.getAllMentores);
 
-//Proyectos
-router.get("/proyecto", (req, res) => {
-  res.send("Proyecto asignado");
-}); // para ver detalles del proyecto
+// Obtener un mentor por ID
+router.get("/:id_mentor", mentorController.getMentorById);
 
-//Egresados
-router.get("/egresados", (req, res) => {
-  res.send("Lista de egresados");
-}); // para mostrar el mentor del egresado
+// Actualizar un mentor por ID
+router.put("/:id_mentor", mentorController.updateMentor);
+
+// Eliminar un mentor por ID
+router.delete("/:id_mentor", mentorController.deleteMentor);
 
 module.exports = router;

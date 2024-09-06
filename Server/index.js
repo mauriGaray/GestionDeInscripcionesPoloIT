@@ -17,7 +17,8 @@ const PORT = process.env.PORT || 3000;
 const egresadoRoutes = require("./src/routes/egresadoRoutes");
 const mentorRoutes = require("./src/routes/mentorRoutes");
 const adminRoutes = require("./src/routes/adminRoutes");
-const proyectoRoutes = require("./src/routes/proyectoRoutes");
+const proyectoRoutes = require("./src/routes/proyectosRoutes");
+const cursosRoutes = require("./src/routes/cursoRoutes");
 
 // Middleware para procesar datos de formularios y peticiones JSON
 app.use(express.urlencoded({ extended: true })); // Para procesar datos de formularios
@@ -39,6 +40,7 @@ app.use("/api/v0/egresado", egresadoRoutes);
 app.use("/api/v0/mentor", mentorRoutes);
 app.use("/api/v0/admin", adminRoutes);
 app.use("/api/v0/proyecto", proyectoRoutes);
+app.use("/api/v0/curso", cursosRoutes);
 app.use(error404);
 app.use(error500);
 

@@ -1,4 +1,4 @@
-const db = require("../config/db");
+const pool = require("../config/db");
 // Crear un nuevo proyecto
 const createProyecto = async (proyecto) => {
   const { titulo, descripcion, fecha_inicio, fecha_fin, mentor_id_mentor } =

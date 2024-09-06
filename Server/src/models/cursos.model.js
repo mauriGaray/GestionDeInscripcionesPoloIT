@@ -1,4 +1,4 @@
-const db = require("../config/db");
+const pool = require("../config/db");
 // Función para crear un nuevo curso
 const createCurso = async (curso) => {
   const { tecnologia, descripcion, ong } = curso;

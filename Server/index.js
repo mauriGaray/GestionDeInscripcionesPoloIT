@@ -4,7 +4,7 @@ const cors = require("cors");
 const methodOverride = require("method-override");
 const path = require("path");
 const { error404, error500 } = require("./src/controllers/errorController");
-
+const db = require("./src/config/db");
 // Inicializar aplicación Express
 const app = express();
 
@@ -31,6 +31,7 @@ app.use(express.static("public"));
 app.use(express.static(path.resolve(__dirname, "public")));
 
 // Rutas de API
+
 app.use("/api/v0/egresado", egresadoRoutes);
 app.use("/api/v0/mentor", mentorRoutes);
 app.use("/api/v0/admin", adminRoutes);

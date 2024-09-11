@@ -1,0 +1,27 @@
+.footer {
+    width: 100%;
+    height: 15vh;
+    background-color: #DFEBFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer-container {
+    max-width: 1280px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    justify-content: left;
+}
+
+.redes {
+    display: flex;
+    justify-content: right;
+    gap: 1rem;
+}

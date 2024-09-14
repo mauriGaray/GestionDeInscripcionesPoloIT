@@ -26,15 +26,15 @@ export const Login = ({setAuthState}) => {
   };
 
   return (
-    <div className="login-container">
-        <h2>BIENVENIDO</h2>
+    <div className="login-container w-80 h-auto p-8 lg:ml-20 rounded-lg text-center">
+        <h2 className="mt-0 mb-10 text-3xl text-white font-bold">BIENVENIDO</h2>
 
         {/* Mostrar el mensaje de error si existe */}
         {error && <p className="error-message">{error}</p>}
 
-        <form onSubmit={handleSubmit}>
-            <div className="form-group">
-                <input
+        <form onSubmit={handleSubmit} className="flex flex-col justify-center items-center w-full">
+            <div className="mb-8 w-full">
+                <input className="w-full h-8 rounded-sm text-xs text-center border-solid border-[#ccc] focus:border-[#34A853] focus:outline-none"
                     type="username"
                     id="username"
                     placeholder="USUARIO"
@@ -44,8 +44,8 @@ export const Login = ({setAuthState}) => {
                 />
             </div>
 
-            <div className="form-group">
-                <input
+            <div className="mb-8 w-full">
+                <input className="w-full h-8 rounded-sm text-xs text-center border-solid border-[#ccc] focus:border-[#34A853] focus:outline-none"
                     type="password"
                     id="password"
                     placeholder="CONTRASEÑA"
@@ -55,11 +55,11 @@ export const Login = ({setAuthState}) => {
                 />
             </div>
 
-            <button type="submit" className="login-btn">ACCEDER</button>
+            <button type="submit" className="login-btn p-2 m-4 bg-green-600 text-white text-xs rounded cursor-pointer">ACCEDER</button>
 
         </form>
         
-        <button className="google-btn">
+        <button className="google-btn flex justify-center items-center p-1 w-full text-xs text-white gap-2 cursor-pointer">
             Ingresá con 
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M5.26644 9.76453C6.19903 6.93863 8.85469 4.90909 12.0002 4.90909C13.6912 4.90909 15.2184 5.50909 16.4184 6.49091L19.9093 3C17.7821 1.14545 15.0548 0 12.0002 0C7.27031 0 3.19799 2.6983 1.24023 6.65002L5.26644 9.76453Z" fill="#EA4335"/>
@@ -68,11 +68,11 @@ export const Login = ({setAuthState}) => {
             <path d="M5.27698 14.2663C5.03833 13.5547 4.90909 12.7922 4.90909 11.9984C4.90909 11.2167 5.03444 10.4652 5.2662 9.76294L1.23999 6.64844C0.436587 8.25884 0 10.0738 0 11.9984C0 13.918 0.444781 15.7286 1.23746 17.3334L5.27698 14.2663Z" fill="#FBBC05"/>
             </svg> 
         </button>
-        <div className="register">
-            <p>No tenés cuenta?</p>
+        <div className="flex justify-center mt-6 text-xs text-white">
+            <p className="m-0">No tenés cuenta?</p>
             <button 
                 onClick={() => setAuthState('register')}
-                className='register-btn'>Registrate
+                className='register-btn p-0 ml-2 bg-transparent text-xs text-indigo-400 cursor-pointer border-none font-bold'>Registrate
             </button>
         </div>
     </div>

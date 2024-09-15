@@ -5,6 +5,7 @@ exports.createEgresado = async (req, res) => {
   try {
     const egresado = req.body;
     const result = await egresadoModel.createEgresado(egresado);
+
     res.status(201).json({ message: "Egresado creado", data: result });
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -15,6 +16,7 @@ exports.createEgresado = async (req, res) => {
 exports.getAllEgresados = async (req, res) => {
   try {
     const results = await egresadoModel.getAllEgresados();
+
     res.status(200).json(results);
   } catch (err) {
     res.status(500).json({ error: err.message });

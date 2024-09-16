@@ -1,6 +1,6 @@
 const asignacionesModel = require("../models/matching.model");
 
-async function asignarEgresadosAProyectos(req, res) {
+async function asignarEgresadosAProyectos() {
   try {
     // Obtener todos los egresados que no están asignados a un proyecto
     const egresadosSinProyecto =

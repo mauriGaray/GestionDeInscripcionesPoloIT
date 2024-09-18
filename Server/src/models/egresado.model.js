@@ -14,12 +14,17 @@ const createEgresado = async (egresado) => {
     provincia,
     curso_id,
   } = egresado;
+
+  const cursoIdNumber = Number(curso_id);
+
+  if (isNaN(cursoIdNumber)) {
+    throw new Error("curso_id debe ser un número válido.");
+  }
   const [results] = await pool.execute(
     "INSERT INTO egresado (nombre, apellido, documento, email, contraseña, genero, nacionalidad, ciudad, provincia, curso_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
     [
       nombre,
       apellido,
-
       documento,
       email,
       contraseña,
@@ -27,7 +32,7 @@ const createEgresado = async (egresado) => {
       nacionalidad,
       ciudad,
       provincia,
-      curso_id,
+      cursoIdNumber,
     ]
   );
   return results;
@@ -66,10 +71,17 @@ const deleteEgresado = async (documento) => {
   return results;
 };
 
+async function findEgresadoByEmail(email) {
+  const [rows] = await pool.query("SELECT * FROM Egresado WHERE email = ?", [
+    email,
+  ]);
+  return rows[0];
+}
 module.exports = {
   createEgresado,
   getAllEgresados,
   getEgresadoByDocumento,
   updateEgresado,
   deleteEgresado,
+  findEgresadoByEmail,
 };

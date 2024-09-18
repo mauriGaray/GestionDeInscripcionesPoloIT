@@ -31,6 +31,17 @@ async function asignarEgresadoAProyecto(egresadoId, proyectoId) {
   `;
   await pool.execute(query, [egresadoId, proyectoId]);
 }
+async function obtenerMentoresSinProyecto() {
+  const query = `
+        SELECT Mentor.*, Curso.nombre AS curso_nombre
+        FROM Mentor
+        LEFT JOIN Proyecto ON Mentor.documento = Proyecto.mentor_id
+        LEFT JOIN Curso ON Mentor.tecnologia_principal = Curso.tecnologias
+        WHERE Proyecto.mentor_id IS NULL
+    `;
+  const [rows] = await pool.execute(query);
+  return rows;
+}
 
 module.exports = {
   obtenerEgresadosSinProyecto,

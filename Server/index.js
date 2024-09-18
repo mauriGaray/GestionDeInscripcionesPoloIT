@@ -20,6 +20,7 @@ const adminRoutes = require("./src/routes/adminRoutes");
 const proyectoRoutes = require("./src/routes/proyectosRoutes");
 const cursosRoutes = require("./src/routes/cursoRoutes");
 const matchingRoutes = require("./src/routes/matchingRoutes");
+const authRoutes = require("./src/routes/authRoutes");
 
 // Middleware para procesar datos de formularios y peticiones JSON
 app.use(express.urlencoded({ extended: true })); // Para procesar datos de formularios
@@ -43,6 +44,7 @@ app.use("/api/v0/admin", adminRoutes);
 app.use("/api/v0/proyecto", proyectoRoutes);
 app.use("/api/v0/curso", cursosRoutes);
 app.use("/api/v0/matching", matchingRoutes);
+app.use("/api/v0/auth", authRoutes);
 app.use(error404);
 app.use(error500);
 

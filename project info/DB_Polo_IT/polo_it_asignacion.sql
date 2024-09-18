@@ -1,0 +1,56 @@
+-- MySQL dump 10.13  Distrib 8.0.38, for Win64 (x86_64)
+--
+-- Host: 127.0.0.1    Database: polo_it
+-- ------------------------------------------------------
+-- Server version	8.4.2
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `asignacion`
+--
+
+DROP TABLE IF EXISTS `asignacion`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `asignacion` (
+  `id_asignacion` int NOT NULL AUTO_INCREMENT,
+  `egresado_id` varchar(50) DEFAULT NULL,
+  `proyecto_id` int DEFAULT NULL,
+  PRIMARY KEY (`id_asignacion`),
+  KEY `proyecto_id` (`proyecto_id`),
+  KEY `egresado_id` (`egresado_id`),
+  CONSTRAINT `asignacion_ibfk_1` FOREIGN KEY (`egresado_id`) REFERENCES `egresado` (`documento`),
+  CONSTRAINT `asignacion_ibfk_2` FOREIGN KEY (`proyecto_id`) REFERENCES `proyecto` (`id_proyecto`)
+) ENGINE=InnoDB AUTO_INCREMENT=221 DEFAULT CHARSET=utf8mb3;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `asignacion`
+--
+
+LOCK TABLES `asignacion` WRITE;
+/*!40000 ALTER TABLE `asignacion` DISABLE KEYS */;
+INSERT INTO `asignacion` VALUES (195,'19385678',1),(196,'19895778',1),(197,'987654321A',1),(198,'19385781',1),(199,'19385778',1),(200,'19385779',1),(201,'19385780',1),(202,'19385782',1),(203,'987654321B',2),(204,'19385798',1),(205,'987654321C',3),(206,'987654321E',5),(207,'987654321G',7),(208,'987654321N',4),(209,'987654321P',6),(210,'987654321I',9),(211,'987654321F',6),(212,'987654321D',4),(213,'987654321H',8),(214,'987654321K',1),(215,'987654321L',2),(216,'987654321M',3),(217,'987654321O',5),(218,'987654321Q',7),(219,'987654321R',8),(220,'987654321S',9);
+/*!40000 ALTER TABLE `asignacion` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2024-09-16 12:57:09

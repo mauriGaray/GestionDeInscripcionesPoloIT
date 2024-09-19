@@ -12,6 +12,8 @@ const app = express();
 
 // Configuración del puerto
 const PORT = process.env.PORT || 3000;
+// Middleware para habilitar CORS
+app.use(cors());
 
 // Importar rutas
 const egresadoRoutes = require("./src/routes/egresadoRoutes");
@@ -29,11 +31,8 @@ app.use(express.json()); // Para parsear el cuerpo de peticiones POST en formato
 // Middleware para habilitar otros métodos HTTP como PUT y DELETE
 app.use(methodOverride("_method"));
 
-// Middleware para habilitar CORS
-app.use(cors());
-
 // Configuración de archivos estáticos
-app.use(express.static("public"));
+app.use(express.static("dist"));
 app.use(express.static(path.resolve(__dirname, "public")));
 
 // Rutas de API

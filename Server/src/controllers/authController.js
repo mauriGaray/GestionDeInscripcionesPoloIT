@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const egresadoModel = require("../models/egresado.model");
+const { findUserByEmail } = require("../models/auth.model");
 require("dotenv").config();
 
 const JWT_SECRET = process.env.JWT_SECRET;
@@ -50,38 +51,38 @@ async function register(req, res) {
   }
 }
 
-// Inicio de sesión del egresado
-async function login(req, res) {
-  const { email, contraseña } = req.body;
-
+const login = async (req, res) => {
   try {
-    // Buscar el egresado por email
-    const egresado = await egresadoModel.findEgresadoByEmail(email);
-    if (!egresado) {
-      return res.status(400).json("Email o contraseña incorrectos.");
+    const { email, contraseña } = req.body;
+
+    // Buscar al usuario por email
+    const users = await findUserByEmail(email);
+
+    if (users.length === 0) {
+      return res.status(404).json("Usuario no encontrado.");
     }
 
-    // Verificar la contraseña
-    const isPasswordValid = await bcrypt.compare(
-      contraseña,
-      egresado.contraseña
-    );
-    if (!isPasswordValid) {
-      return res.status(400).json("Email o contraseña incorrectos.");
+    const user = users[0];
+
+    // Verificar contraseña
+    const validPassword = await bcrypt.compare(contraseña, user.contraseña);
+    if (!validPassword) {
+      return res.status(401).json("Contraseña incorrecta.");
     }
 
-    // Crear un token JWT
+    // Crear el token JWT con el rol del usuario
     const token = jwt.sign(
-      { documento: egresado.documento, email: egresado.email },
+      { documento: user.documento, email: user.email, rol: user.rol }, // Agregar el rol
       JWT_SECRET,
       { expiresIn: "1h" }
     );
-    res.json({ token });
+
+    return res.json({ token });
   } catch (error) {
-    console.error(error);
-    res.status(500).json("Error en el inicio de sesión.");
+    console.error("Error en login:", error);
+    return res.status(500).json("Error del servidor.");
   }
-}
+};
 
 // Middleware para verificar el token JWT
 function verifyToken(req, res, next) {

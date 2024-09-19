@@ -9,10 +9,15 @@ router.post("/register", authController.verifyToken, authController.register);
 router.post("/login", authController.login);
 
 // Ruta protegida (requiere autenticación)
-router.get("/protected", authController.verifyToken, (req, res) => {
-  res.send(
-    `Bienvenido, egresado con documento: ${req.user.documento}. Esta es una ruta protegida.`
-  );
-});
+router.get(
+  "/protected",
+  authController.verifyToken,
+  authController.verifyRole(["egresado"]),
+  (req, res) => {
+    res.send(
+      `Bienvenido, egresado con documento: ${req.user.documento}. Esta es una ruta protegida.`
+    );
+  }
+);
 
 module.exports = router;

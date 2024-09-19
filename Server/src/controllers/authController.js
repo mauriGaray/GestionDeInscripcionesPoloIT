@@ -101,9 +101,23 @@ function verifyToken(req, res, next) {
     next();
   });
 }
+function verifyRole(rolesPermitidos) {
+  return (req, res, next) => {
+    const { rol } = req.user;
+
+    if (!rolesPermitidos.includes(rol)) {
+      return res
+        .status(403)
+        .json("Acceso denegado: no tienes el rol adecuado.");
+    }
+
+    next();
+  };
+}
 
 module.exports = {
   register,
   login,
   verifyToken,
+  verifyRole,
 };

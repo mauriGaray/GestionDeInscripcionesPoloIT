@@ -33,7 +33,7 @@ app.use(methodOverride("_method"));
 
 // Configuración de archivos estáticos
 app.use(express.static("dist"));
-app.use(express.static(path.resolve(__dirname, "public")));
+app.use(express.static(path.resolve(__dirname, "dist")));
 
 // Rutas de API
 

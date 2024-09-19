@@ -21,7 +21,7 @@ const proyectoRoutes = require("./src/routes/proyectosRoutes");
 const cursosRoutes = require("./src/routes/cursoRoutes");
 const matchingRoutes = require("./src/routes/matchingRoutes");
 const authRoutes = require("./src/routes/authRoutes");
-
+const { verifyToken, verifyRole } = require("./src/middlewares/authMiddleware");
 // Middleware para procesar datos de formularios y peticiones JSON
 app.use(express.urlencoded({ extended: true })); // Para procesar datos de formularios
 app.use(express.json()); // Para parsear el cuerpo de peticiones POST en formato JSON
@@ -38,13 +38,20 @@ app.use(express.static(path.resolve(__dirname, "public")));
 
 // Rutas de API
 
+app.use("/api/v0/auth", authRoutes);
+
+app.use(verifyToken);
+
 app.use("/api/v0/egresado", egresadoRoutes);
 app.use("/api/v0/mentor", mentorRoutes);
-app.use("/api/v0/admin", adminRoutes);
 app.use("/api/v0/proyecto", proyectoRoutes);
+
+app.use(verifyRole(["admin"]));
+
 app.use("/api/v0/curso", cursosRoutes);
+app.use("/api/v0/admin", adminRoutes);
 app.use("/api/v0/matching", matchingRoutes);
-app.use("/api/v0/auth", authRoutes);
+
 app.use(error404);
 app.use(error500);
 

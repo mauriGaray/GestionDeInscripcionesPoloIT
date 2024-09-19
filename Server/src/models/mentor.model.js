@@ -3,90 +3,57 @@ const pool = require("../config/db");
 const createMentor = async (mentor) => {
   const { nombre, apellido, email, clave, tecnologia, empresa_asociada } =
     mentor;
-  try {
-    const connection = await pool.getConnection();
-    await connection.query(
-      "INSERT INTO mentor (nombre, apellido, email, clave, tecnologia, empresa_asociada) VALUES (?, ?, ?, ?, ?, ?)",
-      [nombre, apellido, email, clave, tecnologia, empresa_asociada]
-    );
-    connection.release();
-  } catch (error) {
-    throw new Error("Error al crear el mentor: " + error.message);
-  }
+  await pool.execute(
+    "INSERT INTO mentor (documento, nombre, apellido, email, clave, tecnologia, empresa_asociada) VALUES (?, ?, ?, ?, ?, ?, ?)",
+    [
+      mentor.documento,
+      nombre,
+      apellido,
+      email,
+      clave,
+      tecnologia,
+      empresa_asociada,
+    ]
+  );
 };
 
 // Obtener todos los mentores
 const getAllMentores = async () => {
-  try {
-    const connection = await pool.getConnection();
-    const [rows] = await connection.query("SELECT * FROM mentor");
-    connection.release();
-    return rows;
-  } catch (error) {
-    throw new Error("Error al obtener los mentores: " + error.message);
-  }
+  const [rows] = await pool.query("SELECT * FROM mentor");
+  return rows;
 };
 
-// Obtener un mentor por ID
-const getMentorById = async (id_mentor) => {
-  try {
-    const connection = await pool.getConnection();
-    const [rows] = await connection.query(
-      "SELECT * FROM mentor WHERE id_mentor = ?",
-      [id_mentor]
-    );
-    connection.release();
-    if (rows.length === 0) {
-      return null;
-    }
-    return rows[0];
-  } catch (error) {
-    throw new Error("Error al obtener el mentor: " + error.message);
-  }
+// Obtener un mentor por documento
+const getMentorByDocumento = async (documento) => {
+  const [rows] = await pool.query("SELECT * FROM mentor WHERE documento = ?", [
+    documento,
+  ]);
+  return rows[0];
 };
 
-// Actualizar un mentor por ID
-const updateMentor = async (id_mentor, mentor) => {
+// Actualizar un mentor por documento
+const updateMentor = async (documento, mentor) => {
   const { nombre, apellido, email, clave, tecnologia, empresa_asociada } =
     mentor;
-  try {
-    const connection = await pool.getConnection();
-    const [result] = await connection.query(
-      "UPDATE mentor SET nombre = ?, apellido = ?, email = ?, clave = ?, tecnologia = ?, empresa_asociada = ? WHERE id_mentor = ?",
-      [nombre, apellido, email, clave, tecnologia, empresa_asociada, id_mentor]
-    );
-    connection.release();
-    if (result.affectedRows === 0) {
-      return null;
-    }
-    return result;
-  } catch (error) {
-    throw new Error("Error al actualizar el mentor: " + error.message);
-  }
+  const [result] = await pool.query(
+    "UPDATE mentor SET nombre = ?, apellido = ?, email = ?, clave = ?, tecnologia = ?, empresa_asociada = ? WHERE documento = ?",
+    [nombre, apellido, email, clave, tecnologia, empresa_asociada, documento]
+  );
+  return result;
 };
 
-// Eliminar un mentor por ID
-const deleteMentor = async (id_mentor) => {
-  try {
-    const connection = await pool.getConnection();
-    const [result] = await connection.query(
-      "DELETE FROM mentor WHERE id_mentor = ?",
-      [id_mentor]
-    );
-    connection.release();
-    if (result.affectedRows === 0) {
-      return null;
-    }
-    return result;
-  } catch (error) {
-    throw new Error("Error al eliminar el mentor: " + error.message);
-  }
+// Eliminar un mentor por documento
+const deleteMentor = async (documento) => {
+  const [result] = await pool.query("DELETE FROM mentor WHERE documento = ?", [
+    documento,
+  ]);
+  return result;
 };
 
 module.exports = {
   createMentor,
   getAllMentores,
-  getMentorById,
+  getMentorByDocumento,
   updateMentor,
   deleteMentor,
 };

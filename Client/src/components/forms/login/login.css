@@ -1,99 +1,56 @@
 .login-container {
-    width: 250px;
+    /* width: 250px;
     height: auto;
     padding: 2rem;
-    margin-left: 5rem;
-    background-color: #ffffff1a;
+    margin-left: 5rem; 
     border-radius: 1rem;
+    text-align: center;    */
+    background-color: #ffffff1a;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
 }
   
-h2 {
-    margin-top: 0;
-    margin-bottom: 2.5rem;
-    font-size: 2rem;
-    color: white;
-}
-
-form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-}
-  
-.form-group {
-    margin-bottom: 2rem;
-    width: 100%;
-}
-  
-input[type="username"],
+/*input[type="username"],
 input[type="password"] {
     width: 100%;
     height: 30px;
-    /* padding: 10px; */
-    border: 1px solid #ccc;
     border-radius: 2px;
     font-size: 0.7rem;
-    text-align: center;
-}
+    text-align: center; 
+    border: 1px solid #ccc;
+}*/
   
-input[type="username"]:focus,
+/* input[type="username"]:focus,
 input[type="password"]:focus {
     border-color: #34A853;
     outline: none;
-}
+}  */
   
 .login-btn {
     width: 70%;
-    padding: 10px;
+    border: none;
+    transition: background-color 0.3s ease;
+    /* padding: 10px;
     margin: 1rem;
     background-color: #34A853;
     color: white;
     font-size: 0.7rem;
-    border: none;
     border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+    cursor: pointer; */
 }
 
 .google-btn {
-    display: flex;
+    /* display: flex;
     justify-content: center;
-    align-items: center;
-    margin: 1.5rem 0;
+    align-items: center; 
     padding: 0.25rem;
-    width: 100%;
-    border: 0;
-    background-color: #ffffff4d;
+    width: 100%; 
     font-size: 0.7rem;
     color: white;
     gap: 0.5rem;
     cursor: pointer;
-}
-
-.register {
-    display: flex;
-    justify-content: center;
-    margin-top: 1.5rem;
-    font-size: 0.75rem;
-    color: white;
-}
-
-.register p {
-    margin: 0;
-}
-
-.register-btn {
-    padding: 0;
-    margin-left: 0.5rem;
-    background-color: transparent;
-    border: none;
-    font-size: 0.75rem;
-    font-weight: bolder;
-    color: #8792CF;
-    cursor: pointer;
+    */
+    margin: 1.5rem 0;
+    border: 0;
+    background-color: #ffffff4d;
 }
   

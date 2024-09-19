@@ -1,9 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const egresadoController = require("../controllers/egresadosController");
-
-// Crear un nuevo egresado
-router.post("/", egresadoController.createEgresado);
+const { verifyRole } = require("../middlewares/authMiddleware");
 
 // Obtener todos los egresados
 router.get("/", egresadoController.getAllEgresados);
@@ -15,6 +13,10 @@ router.get("/:documento", egresadoController.getEgresadoByDocumento);
 router.put("/:documento", egresadoController.updateEgresado);
 
 // Eliminar un egresado por documento
-router.delete("/:documento", egresadoController.deleteEgresado);
+router.delete(
+  "/:documento",
+  verifyRole(["admin"]),
+  egresadoController.deleteEgresado
+);
 
 module.exports = router;

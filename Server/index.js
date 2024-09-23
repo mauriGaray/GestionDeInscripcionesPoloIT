@@ -32,8 +32,8 @@ app.use(express.json()); // Para parsear el cuerpo de peticiones POST en formato
 app.use(methodOverride("_method"));
 
 // Configuración de archivos estáticos
-app.use(express.static("dist"));
-app.use(express.static(path.resolve(__dirname, "dist")));
+app.use(express.static("public"));
+app.use(express.static(path.resolve(__dirname, "public")));
 
 // Rutas de API
 

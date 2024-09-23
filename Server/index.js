@@ -24,16 +24,16 @@ const cursosRoutes = require("./src/routes/cursoRoutes");
 const matchingRoutes = require("./src/routes/matchingRoutes");
 const authRoutes = require("./src/routes/authRoutes");
 const { verifyToken, verifyRole } = require("./src/middlewares/authMiddleware");
-// Middleware para procesar datos de formularios y peticiones JSON
-app.use(express.urlencoded({ extended: true })); // Para procesar datos de formularios
-app.use(express.json()); // Para parsear el cuerpo de peticiones POST en formato JSON
+
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 // Middleware para habilitar otros métodos HTTP como PUT y DELETE
 app.use(methodOverride("_method"));
 
 // Configuración de archivos estáticos
-app.use(express.static("public"));
-app.use(express.static(path.resolve(__dirname, "public")));
+app.use(express.static("dist"));
+app.use(express.static(path.resolve(__dirname, "dist")));
 
 // Rutas de API
 

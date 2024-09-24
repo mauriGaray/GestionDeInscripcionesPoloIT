@@ -31,10 +31,13 @@ app.use(express.json());
 // Middleware para habilitar otros métodos HTTP como PUT y DELETE
 app.use(methodOverride("_method"));
 
-// Configuración de archivos estáticos
-app.use(express.static("dist"));
-app.use(express.static(path.resolve(__dirname, "dist")));
+// Servir archivos estáticos desde 'Server/dist'
+app.use(express.static(path.join(__dirname, "dist")));
 
+// Manejo de rutas no estáticas
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "dist", "index.html"));
+});
 // Rutas de API
 
 app.use("/api/v0/auth", authRoutes);

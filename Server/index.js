@@ -12,6 +12,8 @@ const app = express();
 
 // Configuración del puerto
 const PORT = process.env.PORT || 3000;
+// Middleware para habilitar CORS
+app.use(cors());
 
 // Importar rutas
 const egresadoRoutes = require("./src/routes/egresadoRoutes");
@@ -22,19 +24,17 @@ const cursosRoutes = require("./src/routes/cursoRoutes");
 const matchingRoutes = require("./src/routes/matchingRoutes");
 const authRoutes = require("./src/routes/authRoutes");
 const { verifyToken, verifyRole } = require("./src/middlewares/authMiddleware");
-// Middleware para procesar datos de formularios y peticiones JSON
-app.use(express.urlencoded({ extended: true })); // Para procesar datos de formularios
-app.use(express.json()); // Para parsear el cuerpo de peticiones POST en formato JSON
+
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 // Middleware para habilitar otros métodos HTTP como PUT y DELETE
 app.use(methodOverride("_method"));
 
-// Middleware para habilitar CORS
-app.use(cors());
+// Servir archivos estáticos desde 'Server/dist'
+app.use(express.static(path.join(__dirname, "dist")));
 
-// Configuración de archivos estáticos
-app.use(express.static("public"));
-app.use(express.static(path.resolve(__dirname, "public")));
+// Manejo de rutas no estáticas
 
 // Rutas de API
 
@@ -51,7 +51,9 @@ app.use(verifyRole(["admin"]));
 app.use("/api/v0/curso", cursosRoutes);
 app.use("/api/v0/admin", adminRoutes);
 app.use("/api/v0/matching", matchingRoutes);
-
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "dist", "index.html"));
+});
 app.use(error404);
 app.use(error500);
 

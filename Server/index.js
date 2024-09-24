@@ -35,9 +35,7 @@ app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, "dist")));
 
 // Manejo de rutas no estáticas
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "dist", "index.html"));
-});
+
 // Rutas de API
 
 app.use("/api/v0/auth", authRoutes);
@@ -53,7 +51,9 @@ app.use(verifyRole(["admin"]));
 app.use("/api/v0/curso", cursosRoutes);
 app.use("/api/v0/admin", adminRoutes);
 app.use("/api/v0/matching", matchingRoutes);
-
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "dist", "index.html"));
+});
 app.use(error404);
 app.use(error500);
 

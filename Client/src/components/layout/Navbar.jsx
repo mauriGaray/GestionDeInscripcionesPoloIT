@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import Logo from "../../../public/logo.png";
-import Profile from "../../../public/profile.png";
+import Logo from "/logo.png";
+import Profile from "/profile.png";
 export const Navbar = () => {
   const [menuMob, setMenuMob] = useState(true);
 

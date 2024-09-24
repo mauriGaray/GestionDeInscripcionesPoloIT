@@ -18,22 +18,14 @@ export const Login = ({ setAuthState }) => {
     }
 
     try {
-      // Enviar datos al backend usando fetch
-      const response = await fetch(`${baseUrl}/auth/login`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ username, password }), // Enviar los datos como JSON
+      // Enviar datos al backend usando axios
+      const response = await axios.post(`${baseUrl}/auth/login`, {
+        username,
+        password,
       });
 
-      // Si la respuesta no es exitosa
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || "Error en la solicitud");
-      }
-
-      const data = await response.json(); // Obtener los datos del servidor
+      // Si la respuesta es exitosa
+      const data = response.data;
       console.log("Respuesta del servidor:", data);
 
       // Limpiar los campos después del envío
@@ -43,9 +35,10 @@ export const Login = ({ setAuthState }) => {
     } catch (error) {
       // Manejar errores de la solicitud
       console.error("Error al enviar la solicitud:", error);
-      setError(error.message);
+      setError(error.response?.data?.message || "Error en la solicitud");
     }
   };
+
   return (
     <div className="login-container w-80 h-auto p-8 lg:ml-20 rounded-lg text-center">
       <h2 className="mt-0 mb-10 text-3xl text-white font-bold">BIENVENIDO</h2>

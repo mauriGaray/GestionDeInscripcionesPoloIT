@@ -52,7 +52,7 @@ async function register(req, res) {
 
 const login = async (req, res) => {
   try {
-    const { email, contraseña } = req.body;
+    const { email, password } = req.body;
 
     const users = await findUserByEmail(email);
 
@@ -62,7 +62,7 @@ const login = async (req, res) => {
 
     const user = users[0];
 
-    const validPassword = await bcrypt.compare(contraseña, user.contraseña);
+    const validPassword = await bcrypt.compare(password, user.contraseña);
     if (!validPassword) {
       return res.status(401).json("Contraseña incorrecta.");
     }

@@ -1,19 +1,35 @@
 const express = require("express");
 const router = express.Router();
 const proyectoController = require("../controllers/proyectoController");
-const { verifyRole } = require("../middlewares/authMiddleware");
+const { verifyRole, verifyToken } = require("../middlewares/authMiddleware");
 // Crear un nuevo proyecto
-router.post("/", verifyRole(["admin"]), proyectoController.createProyecto);
+router.post(
+  "/",
+  verifyToken,
+  verifyRole(["admin"]),
+  proyectoController.createProyecto
+);
 
 // Obtener todos los proyectos
-router.get("/", verifyRole(["admin"]), proyectoController.getAllProyectos);
+router.get(
+  "/",
+  verifyToken,
+  verifyRole(["admin"]),
+  proyectoController.getAllProyectos
+);
 
 // Obtener un proyecto por ID
-router.get("/:id_proyecto", proyectoController.getProyectoById);
+router.get(
+  "/:id_proyecto",
+  verifyToken,
+  verifyRole(["egresado"]),
+  proyectoController.getProyectoById
+);
 
 // Actualizar un proyecto por ID
 router.put(
   "/:id_proyecto",
+  verifyToken,
   verifyRole(["admin"]),
   proyectoController.updateProyecto
 );
@@ -21,6 +37,7 @@ router.put(
 // Eliminar un proyecto por ID
 router.delete(
   "/:id_proyecto",
+  verifyToken,
   verifyRole(["admin"]),
   proyectoController.deleteProyecto
 );

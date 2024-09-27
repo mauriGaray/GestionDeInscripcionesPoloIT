@@ -3,16 +3,17 @@ import axios from "axios";
 import "./login.css";
 
 export const Login = ({ setAuthState }) => {
-  const baseUrl = "http://localhost:3000/api/v0";
-  const [username, setUsername] = useState("");
+  const baseUrl = "/api/v0";
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [tokenLogin, setTokenLogin] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Validación
-    if (!username || !password) {
+    if (!email || !password) {
       setError("Por favor, completa ambos campos.");
       return;
     }
@@ -20,16 +21,15 @@ export const Login = ({ setAuthState }) => {
     try {
       // Enviar datos al backend usando axios
       const response = await axios.post(`${baseUrl}/auth/login`, {
-        username,
+        email,
         password,
       });
 
       // Si la respuesta es exitosa
-      const data = response.data;
-      console.log("Respuesta del servidor:", data);
+      setTokenLogin(response.data.token);
 
       // Limpiar los campos después del envío
-      setUsername("");
+      setEmail("");
       setPassword("");
       setError("");
     } catch (error) {
@@ -52,11 +52,11 @@ export const Login = ({ setAuthState }) => {
         <div className="mb-8 w-full">
           <input
             className="w-full h-8 rounded-sm text-xs text-center border-solid border-[#ccc] focus:border-[#34A853] focus:outline-none"
-            type="username"
-            id="username"
+            type="text"
+            id="email"
             placeholder="EMAIL"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             required
           />
         </div>

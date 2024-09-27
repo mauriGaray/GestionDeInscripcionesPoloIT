@@ -23,7 +23,6 @@ const proyectoRoutes = require("./src/routes/proyectosRoutes");
 const cursosRoutes = require("./src/routes/cursoRoutes");
 const matchingRoutes = require("./src/routes/matchingRoutes");
 const authRoutes = require("./src/routes/authRoutes");
-const { verifyToken, verifyRole } = require("./src/middlewares/authMiddleware");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -34,26 +33,19 @@ app.use(methodOverride("_method"));
 // Servir archivos estáticos desde 'Server/dist'
 app.use(express.static(path.join(__dirname, "dist")));
 
-// Manejo de rutas no estáticas
-
 // Rutas de API
 
 app.use("/api/v0/auth", authRoutes);
-
-app.use(verifyToken);
 
 app.use("/api/v0/egresado", egresadoRoutes);
 app.use("/api/v0/mentor", mentorRoutes);
 app.use("/api/v0/proyecto", proyectoRoutes);
 
-app.use(verifyRole(["admin"]));
-
 app.use("/api/v0/curso", cursosRoutes);
 app.use("/api/v0/admin", adminRoutes);
 app.use("/api/v0/matching", matchingRoutes);
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "dist", "index.html"));
-});
+
+//Errores
 app.use(error404);
 app.use(error500);
 

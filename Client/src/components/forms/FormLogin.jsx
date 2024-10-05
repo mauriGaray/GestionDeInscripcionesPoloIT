@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './login.css';
 
-export const Login = ({setAuthState}) => {
+export const FormLogin = ({setAuthState}) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -55,11 +55,11 @@ export const Login = ({setAuthState}) => {
                 />
             </div>
 
-            <button type="submit" className="login-btn p-2 m-4 bg-green-600 text-white text-xs rounded cursor-pointer">ACCEDER</button>
+            <button type="submit" className="login-btn w-3/4 p-2 m-4 bg-green-600 text-white text-xs rounded cursor-pointer border-none">ACCEDER</button>
 
         </form>
         
-        <button className="google-btn flex justify-center items-center p-1 w-full text-xs text-white gap-2 cursor-pointer">
+        <button className="google-btn flex justify-center items-center p-1 w-full text-xs text-white gap-2 cursor-pointer border-0">
             Ingresá con 
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M5.26644 9.76453C6.19903 6.93863 8.85469 4.90909 12.0002 4.90909C13.6912 4.90909 15.2184 5.50909 16.4184 6.49091L19.9093 3C17.7821 1.14545 15.0548 0 12.0002 0C7.27031 0 3.19799 2.6983 1.24023 6.65002L5.26644 9.76453Z" fill="#EA4335"/>

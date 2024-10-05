@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import Logo from '../../../../public/logo.png'
-import Profile from '../../../../public/profile.png'
+import Logo from '../../../public/logo.png'
+import Profile from '../../../public/profile.png'
 
 export const Navbar = () => {
 
@@ -21,7 +21,9 @@ export const Navbar = () => {
           </div>
           <div className="flex flex-1 items-center justify-center lg:items-stretch lg:justify-start">
             <div className="flex flex-shrink-0 items-center">
-              <img className="h-8 w-auto" src={Logo} alt="Logo" />
+              <Link to={'/'}>
+                <img className="h-8 w-auto" src={Logo} alt="Logo" />
+              </Link>
             </div>
             <div className="hidden lg:ml-6 lg:block">
               <div className="flex space-x-4">
@@ -40,7 +42,7 @@ export const Navbar = () => {
                     </Link>
                 </li>
                 <li className="text-white list-none">
-                    <Link to={'/'}>
+                    <Link to={'/Perfil'}>
                         <button className="text-neutral-950 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">
                             Perfil
                         </button>
@@ -59,7 +61,7 @@ export const Navbar = () => {
           <div className="absolute inset-y-0 right-0 flex items-center pr-2 lg:static lg:inset-auto lg:ml-6 lg:pr-0">
             <div className="relative ml-3">
                 <li className="list-none">
-                    <Link to={'/'}>
+                    <Link to={'/Perfil'}>
                         <button className="text-gray-800 px-4 py-2 rounded flex items-center">
                             <img src={Profile} alt="perfil" />
                         </button>    

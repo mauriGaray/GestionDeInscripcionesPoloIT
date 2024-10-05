@@ -15,7 +15,7 @@ export const Onboarding = () => {
                     </Link> 
                 </div>
                 <div>
-                    <img src="./public/onboard-il.png" alt="" />    
+                    <img src="./public/onboard-il.png" alt="" />
                 </div>
             </div>
             {/* <div className="max-w-7xl">

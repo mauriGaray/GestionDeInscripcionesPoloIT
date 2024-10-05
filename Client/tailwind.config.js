@@ -1,14 +1,18 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ["./src/**/*.{html,js,ts,jsx,tsx}"],
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        customBlue: "#15619d",
+        customRed: "#d43c54",
+      },
+    },
     screens: {
-      'sm': {'max': '650px'},
+      sm: { max: "650px" },
       // 'md': {'min': '768px', 'max': '1023px'},
-      'lg': {'min': '651px'},
+      lg: { min: "651px" },
     },
   },
   plugins: [],
-}
-
+};

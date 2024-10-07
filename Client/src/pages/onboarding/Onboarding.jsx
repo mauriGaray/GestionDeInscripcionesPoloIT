@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-
+import "./onboarding.css";
 export const Onboarding = () => {
   return (
-    <div className="bg-[url('/bg-image.png')] onboarding p-8 flex flex-col justify-center items-center w-full min-h-screen bg-center bg-no-repeat bg-cover bg-fixed">
+    <div className=" main-onboarding__bg onboarding p-8 flex flex-col justify-center items-center w-full min-h-screen bg-center bg-no-repeat bg-cover bg-fixed">
       <div className="mb-4 flex flex-col justify-center items-left w-full max-w-7xl">
         <h1 className="lg:mt-12 sm:text-4xl lg:text-5xl text-white font-extrabold">
           PROCESO DE INSCRIPCIÓN

@@ -1,20 +1,38 @@
 const express = require("express");
 const router = express.Router();
 const egresadoController = require("../controllers/egresadosController");
-const { verifyRole } = require("../middlewares/authMiddleware");
+const { verifyRole, verifyToken } = require("../middlewares/authMiddleware");
 
 // Obtener todos los egresados
-router.get("/", egresadoController.getAllEgresados);
+router.get(
+  "/",
+  verifyToken,
+  verifyRole(["egresado"]),
+  egresadoController.getAllEgresados
+);
 
 // Obtener un egresado por documento
-router.get("/:documento", egresadoController.getEgresadoByDocumento);
+router.get(
+  "/:documento",
+  verifyToken,
+  verifyRole(["egresado"]),
+
+  egresadoController.getEgresadoByDocumento
+);
 
 // Actualizar un egresado por documento
-router.put("/:documento", egresadoController.updateEgresado);
+router.put(
+  "/:documento",
+  verifyToken,
+  verifyRole(["egresado"]),
+
+  egresadoController.updateEgresado
+);
 
 // Eliminar un egresado por documento
 router.delete(
   "/:documento",
+  verifyToken,
   verifyRole(["admin"]),
   egresadoController.deleteEgresado
 );

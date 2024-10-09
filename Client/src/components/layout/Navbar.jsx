@@ -1,14 +1,17 @@
-import { Link } from "react-router-dom";
-import { useState } from "react";
-import Logo from "/logo.png";
-import Profile from "/profile.png";
+import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import Logo from '../../../public/logo.png'
+import Profile from '../../../public/profile.png'
+
 export const Navbar = () => {
+
   const [menuMob, setMenuMob] = useState(true);
 
   return (
     <nav className="bg-indigo-100">
       <div className="mx-auto max-w-7xl px-2 lg:px-6 sm:px-8">
         <div className="relative flex h-16 items-center justify-between">
+
           <div className="absolute inset-y-0 left-0 flex items-center md:hidden">
             <button
               id="menuButton"
@@ -64,23 +67,27 @@ export const Navbar = () => {
                       Contacto
                     </button>
                   </Link>
+
                 </li>
               </div>
             </div>
           </div>
+
           <div className="hidden lg:flex absolute inset-y-0 right-0 items-center pr-2 font-bold text-lg md:flex  lg:static lg:inset-auto lg:ml-6 lg:pr-0">
             <button className="relative ml-3 text-neutral-950 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 font-bold text-base">
               <li className="list-none">
                 <Link to={"/login"}>Iniciar sesión</Link>
               </li>
             </button>
+
           </div>
         </div>
       </div>
-
+      
       {menuMob ? (
         <div className="hidden"></div>
       ) : (
+
         <div className="lg:hidden" id="mobile-menu">
           <div className="space-y-1 px-2 pb-3 pt-2">
             <li className="text-white list-none">
@@ -105,8 +112,10 @@ export const Navbar = () => {
               </Link>
             </li>
           </div>
+
         </div>
+      </div>
       )}
     </nav>
-  );
-};
+  )
+}

@@ -13,12 +13,15 @@ import { Equipo } from './pages/profile/equipo/Equipo';
 import { Footer } from "./components/layout/Footer";
 import { NotFound } from "./pages/not found/NotFound";
 import AdminView from "./pages/Admin/adminView/AdminView";
+import Onboarding2 from "./pages/onboarding/Onboarding2";
 
 function App() {
   return (
     <BrowserRouter>
       <Navbar />
       <Routes>
+        <Route path="/2" element={<Onboarding2 />} />
+
         <Route path="/" element={<Onboarding />} />
         <Route path="/Inicio" element={<Inicio />} />
         <Route path="/admin" element={<AdminView />} />

@@ -23,6 +23,7 @@ const proyectoRoutes = require("./src/routes/proyectosRoutes");
 const cursosRoutes = require("./src/routes/cursoRoutes");
 const matchingRoutes = require("./src/routes/matchingRoutes");
 const authRoutes = require("./src/routes/authRoutes");
+const imageRoutes = require("./src/routes/imageRoutes");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -44,6 +45,7 @@ app.use("/api/v0/proyecto", proyectoRoutes);
 app.use("/api/v0/curso", cursosRoutes);
 app.use("/api/v0/admin", adminRoutes);
 app.use("/api/v0/matching", matchingRoutes);
+app.use("/api/v0/images", imageRoutes);
 
 //Errores
 app.use(error404);

@@ -45,7 +45,7 @@ app.use("/api/v0/proyecto", proyectoRoutes);
 app.use("/api/v0/curso", cursosRoutes);
 app.use("/api/v0/admin", adminRoutes);
 app.use("/api/v0/matching", matchingRoutes);
-app.use("/api/v0/images", imageRoutes);
+app.use("/api/v0/uploadImages", imageRoutes);
 
 //Errores
 app.use(error404);

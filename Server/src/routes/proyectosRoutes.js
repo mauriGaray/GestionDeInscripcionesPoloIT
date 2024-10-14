@@ -13,8 +13,7 @@ router.post(
 // Obtener todos los proyectos
 router.get(
   "/",
-  verifyToken,
-  verifyRole(["admin"]),
+
   proyectoController.getAllProyectos
 );
 

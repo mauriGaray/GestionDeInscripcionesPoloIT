@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import MainLayout from "../../../components/layout/MainLayout";
+import axios from "axios";
 import { Pie, Bar } from "react-chartjs-2";
 import Chart from "chart.js/auto";
-
+import { obtenerProyectos } from "../../../services/proyecto";
 const AdminView = () => {
+  const baseUrl = "/api/v0";
   const [graduates, setGraduates] = useState([]);
   const [projects, setProjects] = useState([]);
   const [courses, setCourses] = useState([]);
@@ -11,16 +12,20 @@ const AdminView = () => {
   const [activeView, setActiveView] = useState("proyectos"); // Estado para manejar la vista activa
 
   useEffect(() => {
+    cargarProyectos = axios.get(`${baseUrl}/proyecto/`);
+    console.log(cargarProyectos);
     fetchData();
   }, []);
 
-  const fetchData = () => {
+  const fetchData = async () => {
     // Ejemplo de datos. Sustituye esto con la llamada a tu base de datos real.
+
     setGraduates([
       { name: "Egresado 1", available: true, course: "Curso 1" },
       { name: "Egresado 2", available: true, course: "Curso 2" },
       { name: "Egresado 3", available: true, course: "Curso 1" },
     ]);
+
     setProjects([
       {
         name: "Proyecto 1",
@@ -346,7 +351,9 @@ const AdminView = () => {
 
   return (
     <div className="max-w-screen-xl mx-auto p-8 bg-customBlue">
-      <h1 className="text-3xl font-bold mb-6">Admin Dashboard</h1>
+      <h1 className="text-3xl font-bold mb-6">
+        Bienvenido Nombre de administrador!
+      </h1>
       <div className="bg-gray-100 shadow rounded-lg p-6 mb-8 ">
         <div className="flex space-x-4 mb-4  ">
           <button

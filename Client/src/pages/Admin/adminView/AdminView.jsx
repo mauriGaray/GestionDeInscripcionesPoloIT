@@ -1,49 +1,38 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+
 import { Pie, Bar } from "react-chartjs-2";
 import Chart from "chart.js/auto";
 import { obtenerProyectos } from "../../../services/proyecto";
 const AdminView = () => {
-  const baseUrl = "/api/v0";
   const [graduates, setGraduates] = useState([]);
   const [projects, setProjects] = useState([]);
   const [courses, setCourses] = useState([]);
   const [assignedData, setAssignedData] = useState([]);
   const [activeView, setActiveView] = useState("proyectos"); // Estado para manejar la vista activa
-
+  let cargarProyectos;
   useEffect(() => {
-    cargarProyectos = axios.get(`${baseUrl}/proyecto/`);
-    console.log(cargarProyectos);
     fetchData();
   }, []);
 
   const fetchData = async () => {
-    // Ejemplo de datos. Sustituye esto con la llamada a tu base de datos real.
+    try {
+      setGraduates([
+        { name: "Egresado 1", available: true, course: "Curso 1" },
+        { name: "Egresado 2", available: true, course: "Curso 2" },
+        { name: "Egresado 3", available: true, course: "Curso 1" },
+      ]);
 
-    setGraduates([
-      { name: "Egresado 1", available: true, course: "Curso 1" },
-      { name: "Egresado 2", available: true, course: "Curso 2" },
-      { name: "Egresado 3", available: true, course: "Curso 1" },
-    ]);
+      const response = await obtenerProyectos();
+      console.log(response);
+      setProjects(response);
 
-    setProjects([
-      {
-        name: "Proyecto 1",
-        availableSpots: 2,
-        endDate: "2024-12-30",
-        course: "Curso 1",
-      },
-      {
-        name: "Proyecto 2",
-        availableSpots: 1,
-        endDate: "2024-11-15",
-        course: "Curso 2",
-      },
-    ]);
-    setCourses([
-      { name: "Curso 1", projectCount: 1, graduateCount: 2 },
-      { name: "Curso 2", projectCount: 1, graduateCount: 1 },
-    ]);
+      setCourses([
+        { name: "Curso 1", projectCount: 1, graduateCount: 2 },
+        { name: "Curso 2", projectCount: 1, graduateCount: 1 },
+      ]);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   // Calcular días restantes para la finalización de los proyectos utilizando JavaScript nativo
@@ -121,7 +110,7 @@ const AdminView = () => {
 
   // Sección de Proyectos
   const renderProjects = () => (
-    <div className="bg-white shadow rounded-lg p-6 mb-8 ">
+    <div className="bg-white shadow rounded-lg p-6 mb-8">
       <h2 className="text-2xl font-semibold mb-4 bg-gray-200 p-4">
         Proyectos{" "}
         <button
@@ -131,53 +120,67 @@ const AdminView = () => {
         </button>
       </h2>
       <div className="overflow-x-auto">
-        <table className="table-auto w-full border-collapse">
-          <thead>
-            <tr>
-              <th className="px-4 py-2 bg-gray-200 border border-gray-400">
-                Nombre
-              </th>
-              <th className="px-4 py-2 bg-gray-200 border border-gray-400">
-                Cupos Disponibles
-              </th>
-              <th className="px-4 py-2 bg-gray-200 border border-gray-400">
-                Curso
-              </th>
-              <th className="px-4 py-2 bg-gray-200 border border-gray-400">
-                Días Restantes
-              </th>
-              <th className="px-4 py-2 bg-gray-200 border border-gray-400">
-                Acciones
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {projects.map((project, index) => (
-              <tr key={index} className="border-t">
-                <td className="px-4 py-2 border border-gray-400">
-                  {project.name}
-                </td>
-                <td className="px-4 py-2 border border-gray-400">
-                  {project.availableSpots}
-                </td>
-                <td className="px-4 py-2 border border-gray-400">
-                  {project.course}
-                </td>
-                <td className="px-4 py-2 border border-gray-400">
-                  {calculateDaysLeft(project.endDate)} días
-                </td>
-                <td className="px-4 py-2 border border-gray-400">
-                  <button className="bg-blue-500 text-white px-2 py-1 rounded mr-2">
-                    Modificar
-                  </button>
-                  <button className="bg-red-500 text-white px-2 py-1 rounded">
-                    Eliminar
-                  </button>
-                </td>
+        <div className="max-h-96 overflow-y-auto">
+          <table className="table-auto w-full border-collapse">
+            <thead>
+              <tr>
+                <th className="px-4 py-2 bg-gray-200 border border-gray-400">
+                  Nombre
+                </th>
+                <th className="px-4 py-2 bg-gray-200 border border-gray-400">
+                  Descripción
+                </th>
+                <th className="px-4 py-2 bg-gray-200 border border-gray-400">
+                  Curso
+                </th>
+                <th className="px-4 py-2 bg-gray-200 border border-gray-400">
+                  Mentor
+                </th>
+                <th className="px-4 py-2 bg-gray-200 border border-gray-400">
+                  Fecha de inicio
+                </th>
+                <th className="px-4 py-2 bg-gray-200 border border-gray-400">
+                  Fecha de finalización
+                </th>
+                <th className="px-4 py-2 bg-gray-200 border border-gray-400">
+                  Acciones
+                </th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {projects.map((project, index) => (
+                <tr key={index} className="border-t">
+                  <td className="px-4 py-2 border border-gray-400">
+                    {project.nombre}
+                  </td>
+                  <td className="px-4 py-2 border border-gray-400">
+                    {project.descripcion}
+                  </td>
+                  <td className="px-4 py-2 border border-gray-400">
+                    {project.curso_id}
+                  </td>
+                  <td className="px-4 py-2 border border-gray-400">
+                    {project.mentor_id || "No tiene mentor asignado"}
+                  </td>
+                  <td className="px-4 py-2 border border-gray-400">
+                    {project.fecha_inicio}
+                  </td>
+                  <td className="px-2 py-2 border border-gray-400">
+                    {project.fecha_finalizacion}
+                  </td>
+                  <td className="px-4 py-2 border border-gray-400">
+                    <button className="bg-blue-500 text-white px-2 py-1 rounded mr-2">
+                      Modificar
+                    </button>
+                    <button className="bg-red-500 text-white px-2 py-1 rounded">
+                      Eliminar
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );

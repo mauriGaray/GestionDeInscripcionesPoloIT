@@ -2,12 +2,15 @@
 
 #root {
   font-family: "Inter", sans-serif;
+  /* height: auto;
+  min-height: 100vh; */
 }
 
 body {
   margin: 0;
   padding: 0;
   min-width: 320px;
-  min-height: 100vh;
+  /* height: auto;
+  min-height: 100vh; */
   box-sizing: border-box;
 } 

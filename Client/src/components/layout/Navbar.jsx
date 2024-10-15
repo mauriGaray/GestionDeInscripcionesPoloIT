@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import Logo from "/logo.png";
-import Profile from "/profile.png";
 
 export const Navbar = () => {
   const [menuMob, setMenuMob] = useState(true);
@@ -47,21 +46,21 @@ export const Navbar = () => {
               <div className="flex space-x-4">
                 <li className="text-white list-none">
                   <Link to={"/"}>
-                    <button className="text-neutral-950 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 font-bold text-base">
+                    <button className="text-neutral-950 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-base">
                       Proyectos en proceso
                     </button>
                   </Link>
                 </li>
                 <li className="text-white list-none">
                   <Link to={"/"}>
-                    <button className="text-neutral-950 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 font-bold text-base">
+                    <button className="text-neutral-950 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-base">
                       Nosotros
                     </button>
                   </Link>
                 </li>
                 <li className="text-white list-none">
                   <Link to={"/"}>
-                    <button className="text-neutral-950 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 font-bold text-base">
+                    <button className="text-neutral-950 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-base">
                       Contacto
                     </button>
                   </Link>
@@ -73,7 +72,7 @@ export const Navbar = () => {
           <div className="hidden lg:flex absolute inset-y-0 right-0 items-center pr-2 font-bold text-lg md:flex  lg:static lg:inset-auto lg:ml-6 lg:pr-0">
             <button className="relative ml-3 text-neutral-950 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 font-bold text-base">
               <li className="list-none">
-                <Link to={"/login"}>Iniciar sesión</Link>
+                <Link to={"/Login"}>Iniciar sesión</Link>
               </li>
             </button>
           </div>

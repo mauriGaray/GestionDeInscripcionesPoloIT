@@ -7,6 +7,9 @@ export default {
         customBlue: "#15619d",
         customRed: "#d43c54",
       },
+      height: {
+        'customHeight': 'calc(100vh - 11rem)',
+      },
     },
     screens: {
       sm: "640px",

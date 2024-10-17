@@ -3,33 +3,34 @@ import React, { useState, useEffect } from "react";
 import { Pie, Bar } from "react-chartjs-2";
 import Chart from "chart.js/auto";
 import { obtenerProyectos } from "../../../services/proyecto";
+import { obtenerEgresados } from "../../../services/egresado";
+import { obtenerCursos } from "../../../services/curso";
+import { obtenerMentores } from "../../../services/mentor";
 const AdminView = () => {
   const [graduates, setGraduates] = useState([]);
   const [projects, setProjects] = useState([]);
   const [courses, setCourses] = useState([]);
+  const [mentors, setMentors] = useState([]);
   const [assignedData, setAssignedData] = useState([]);
-  const [activeView, setActiveView] = useState("proyectos"); // Estado para manejar la vista activa
-  let cargarProyectos;
+  const [activeView, setActiveView] = useState("proyectos");
+
   useEffect(() => {
     fetchData();
   }, []);
 
   const fetchData = async () => {
     try {
-      setGraduates([
-        { name: "Egresado 1", available: true, course: "Curso 1" },
-        { name: "Egresado 2", available: true, course: "Curso 2" },
-        { name: "Egresado 3", available: true, course: "Curso 1" },
-      ]);
+      const graduate = await obtenerEgresados();
+      setGraduates(graduate);
 
-      const response = await obtenerProyectos();
-      console.log(response);
-      setProjects(response);
+      const project = await obtenerProyectos();
+      setProjects(project);
 
-      setCourses([
-        { name: "Curso 1", projectCount: 1, graduateCount: 2 },
-        { name: "Curso 2", projectCount: 1, graduateCount: 1 },
-      ]);
+      const course = await obtenerCursos();
+      setCourses(course);
+
+      const mentor = await obtenerMentores();
+      setMentors(mentor);
     } catch (error) {
       console.log(error);
     }
@@ -181,54 +182,64 @@ const AdminView = () => {
   const renderCourses = () => (
     <div className="bg-white shadow rounded-lg p-6 mb-8">
       <h2 className="text-2xl font-semibold mb-4 bg-gray-200 p-4">
-        Cursos{" "}
+        Cursos
         <button
           className="bg-green-500 text-white px-2 py-2 rounded mx-4"
           onClick={() => alert("Agregar nuevo elemento")}>
           Agregar
         </button>
       </h2>
-      <table className="table-auto w-full border-collapse">
-        <thead>
-          <tr>
-            <th className="px-4 py-2 bg-gray-200 border border-gray-400">
-              Nombre
-            </th>
-            <th className="px-4 py-2 bg-gray-200 border border-gray-400">
-              Egresados
-            </th>
-            <th className="px-4 py-2 bg-gray-200 border border-gray-400">
-              Proyectos
-            </th>
-            <th className="px-4 py-2 bg-gray-200 border border-gray-400">
-              Acciones
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {courses.map((course, index) => (
-            <tr key={index} className="border-t">
-              <td className="px-4 py-2 border border-gray-400">
-                {course.name}
-              </td>
-              <td className="px-4 py-2 border border-gray-400">
-                {course.graduateCount}
-              </td>
-              <td className="px-4 py-2 border border-gray-400">
-                {course.projectCount}
-              </td>
-              <td className="px-4 py-2 border border-gray-400">
-                <button className="bg-blue-500 text-white px-2 py-1 rounded mr-2">
-                  Modificar
-                </button>
-                <button className="bg-red-500 text-white px-2 py-1 rounded">
-                  Eliminar
-                </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <div className="overflow-x-auto">
+        <div className="max-h-96 overflow-y-auto">
+          <table className="table-auto w-full border-collapse">
+            <thead>
+              <tr>
+                <th className="px-4 py-2 bg-gray-200 border border-gray-400">
+                  Nombre
+                </th>
+                <th className="px-4 py-2 bg-gray-200 border border-gray-400">
+                  ONG
+                </th>
+                <th className="px-4 py-2 bg-gray-200 border border-gray-400">
+                  Tecnologías
+                </th>
+                <th className="px-4 py-2 bg-gray-200 border border-gray-400">
+                  Descripción
+                </th>
+                <th className="px-4 py-2 bg-gray-200 border border-gray-400">
+                  Acciones
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {courses.map((course, index) => (
+                <tr key={index} className="border-t">
+                  <td className="px-4 py-2 border border-gray-400">
+                    {course.nombre}
+                  </td>
+                  <td className="px-4 py-2 border border-gray-400">
+                    {course.ONG || "No tiene ONG asignada"}
+                  </td>
+                  <td className="px-4 py-2 border border-gray-400">
+                    {course.tecnologias || "No tiene tecnologías asignadas"}
+                  </td>
+                  <td className="px-4 py-2 border border-gray-400">
+                    {course.descripcion || "No tiene descripción asignada"}
+                  </td>
+                  <td className="px-4 py-2 border border-gray-400">
+                    <button className="bg-blue-500 text-white px-2 py-1 rounded mr-2">
+                      Modificar
+                    </button>
+                    <button className="bg-red-500 text-white px-2 py-1 rounded">
+                      Eliminar
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   );
 
@@ -243,48 +254,57 @@ const AdminView = () => {
           Agregar
         </button>
       </h2>
-
-      <table className="table-auto w-full border-collapse">
-        <thead>
-          <tr>
-            <th className="px-4 py-2 bg-gray-200 border border-gray-400">
-              Nombre
-            </th>
-            <th className="px-4 py-2 bg-gray-200 border border-gray-400">
-              Curso
-            </th>
-            <th className="px-4 py-2 bg-gray-200 border border-gray-400">
-              Disponibilidad
-            </th>
-            <th className="px-4 py-2 bg-gray-200 border border-gray-400">
-              Acciones
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {graduates.map((graduate, index) => (
-            <tr key={index} className="border-t">
-              <td className="px-4 py-2 border border-gray-400">
-                {graduate.name}
-              </td>
-              <td className="px-4 py-2 border border-gray-400">
-                {graduate.course}
-              </td>
-              <td className="px-4 py-2 border border-gray-400">
-                {graduate.available ? "Disponible" : "No Disponible"}
-              </td>
-              <td className="px-4 py-2 border border-gray-400">
-                <button className="bg-blue-500 text-white px-2 py-1 rounded mr-2">
-                  Modificar
-                </button>
-                <button className="bg-red-500 text-white px-2 py-1 rounded">
-                  Eliminar
-                </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <div className="overflow-x-auto">
+        <div className="max-h-96 overflow-y-auto">
+          <table className="table-auto w-full border-collapse">
+            <thead>
+              <tr>
+                <th className="px-4 py-2 bg-gray-200 border border-gray-400">
+                  Nombre
+                </th>
+                <th className="px-4 py-2 bg-gray-200 border border-gray-400">
+                  Apellido
+                </th>
+                <th className="px-4 py-2 bg-gray-200 border border-gray-400">
+                  Curso del que viene
+                </th>
+                <th className="px-4 py-2 bg-gray-200 border border-gray-400">
+                  Email
+                </th>
+                <th className="px-4 py-2 bg-gray-200 border border-gray-400">
+                  Acciones
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {graduates.map((graduate, index) => (
+                <tr key={index} className="border-t">
+                  <td className="px-4 py-2 border border-gray-400">
+                    {graduate.nombre}
+                  </td>
+                  <td className="px-4 py-2 border border-gray-400">
+                    {graduate.apellido}
+                  </td>
+                  <td className="px-4 py-2 border border-gray-400">
+                    {graduate.curso_id}
+                  </td>
+                  <td className="px-4 py-2 border border-gray-400">
+                    {graduate.email}
+                  </td>
+                  <td className="px-4 py-2 border border-gray-400">
+                    <button className="bg-blue-500 text-white px-2 py-1 rounded mr-2">
+                      Modificar
+                    </button>
+                    <button className="bg-red-500 text-white px-2 py-1 rounded">
+                      Eliminar
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   );
 
@@ -292,55 +312,76 @@ const AdminView = () => {
   const renderMentors = () => (
     <div className="bg-white shadow rounded-lg p-6 mb-8">
       <h2 className="text-2xl font-semibold mb-4 bg-gray-200 p-4">
-        Mentores{" "}
+        Mentores
         <button
           className="bg-green-500 text-white px-2 py-2 rounded mx-4"
           onClick={() => alert("Agregar nuevo elemento")}>
           Agregar
         </button>
       </h2>
-      <table className="table-auto w-full border-collapse">
-        <thead>
-          <tr>
-            <th className="px-4 py-2 bg-gray-200 border border-gray-400">
-              Nombre
-            </th>
-            <th className="px-4 py-2 bg-gray-200 border border-gray-400">
-              Especialidad
-            </th>
-            <th className="px-4 py-2 bg-gray-200 border border-gray-400">
-              Acciones
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {/* Puedes mapear tus mentores aquí */}
-          <tr>
-            <td className="px-4 py-2 border border-gray-400">Mentor 1</td>
-            <td className="px-4 py-2 border border-gray-400">Especialidad 1</td>
-            <td className="px-4 py-2 border border-gray-400">
-              <button className="bg-blue-500 text-white px-2 py-1 rounded mr-2">
-                Modificar
-              </button>
-              <button className="bg-red-500 text-white px-2 py-1 rounded">
-                Eliminar
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td className="px-4 py-2 border border-gray-400">Mentor 2</td>
-            <td className="px-4 py-2 border border-gray-400">Especialidad 2</td>
-            <td className="px-4 py-2 border border-gray-400">
-              <button className="bg-blue-500 text-white px-2 py-1 rounded mr-2">
-                Modificar
-              </button>
-              <button className="bg-red-500 text-white px-2 py-1 rounded">
-                Eliminar
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div className="overflow-x-auto">
+        <div className="max-h-96 overflow-y-auto">
+          <table className="table-auto w-full border-collapse">
+            <thead>
+              <tr>
+                <th className="px-4 py-2 bg-gray-200 border border-gray-400">
+                  Nombre
+                </th>
+                <th className="px-4 py-2 bg-gray-200 border border-gray-400">
+                  Apellido
+                </th>
+                <th className="px-4 py-2 bg-gray-200 border border-gray-400">
+                  Empresa
+                </th>
+                <th className="px-4 py-2 bg-gray-200 border border-gray-400">
+                  Proyecto
+                </th>
+                <th className="px-4 py-2 bg-gray-200 border border-gray-400">
+                  Tecnologías
+                </th>
+                <th className="px-4 py-2 bg-gray-200 border border-gray-400">
+                  Email
+                </th>
+                <th className="px-4 py-2 bg-gray-200 border border-gray-400">
+                  Acciones
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {mentors.map((mentor, index) => (
+                <tr key={index} className="border-t">
+                  <td className="px-4 py-2 border border-gray-400">
+                    {mentor.nombre}
+                  </td>
+                  <td className="px-4 py-2 border border-gray-400">
+                    {mentor.apellido}
+                  </td>
+                  <td className="px-4 py-2 border border-gray-400">
+                    {mentor.empresa_asociada}
+                  </td>
+                  <td className="px-4 py-2 border border-gray-400">
+                    {mentor.proyecto_id || "No tiene proyecto asignado"}
+                  </td>
+                  <td className="px-4 py-2 border border-gray-400">
+                    {`${mentor.tecnologia_principal} - ${mentor.tecnologias_secundarias}`}
+                  </td>
+                  <td className="px-4 py-2 border border-gray-400">
+                    {mentor.email}
+                  </td>
+                  <td className="px-4 py-2 border border-gray-400">
+                    <button className="bg-blue-500 text-white px-2 py-1 rounded mr-2">
+                      Modificar
+                    </button>
+                    <button className="bg-red-500 text-white px-2 py-1 rounded">
+                      Eliminar
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   );
 

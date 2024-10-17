@@ -35,14 +35,6 @@ const AdminView = () => {
     }
   };
 
-  // Calcular días restantes para la finalización de los proyectos utilizando JavaScript nativo
-  const calculateDaysLeft = (endDate) => {
-    const now = new Date();
-    const end = new Date(endDate);
-    const timeDifference = end.getTime() - now.getTime();
-    return Math.ceil(timeDifference / (1000 * 3600 * 24)); // Milisegundos a días
-  };
-
   // Asignación aleatoria de egresados a proyectos
   const assignRandomly = () => {
     const availableGraduates = graduates.filter((grad) => grad.available);
@@ -112,7 +104,7 @@ const AdminView = () => {
   const renderProjects = () => (
     <div className="bg-white shadow rounded-lg p-6 mb-8">
       <h2 className="text-2xl font-semibold mb-4 bg-gray-200 p-4">
-        Proyectos{" "}
+        Proyectos
         <button
           className="bg-green-500 text-white px-2 py-2 rounded mx-4"
           onClick={() => alert("Agregar nuevo elemento")}>

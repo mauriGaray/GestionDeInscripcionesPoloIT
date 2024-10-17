@@ -22,6 +22,7 @@ const AdminView = () => {
     try {
       const graduate = await obtenerEgresados();
       setGraduates(graduate);
+      console.log(graduate);
 
       const project = await obtenerProyectos();
       setProjects(project);
@@ -66,7 +67,7 @@ const AdminView = () => {
 
   // Datos para gráficos
   const projectsPerCourseData = {
-    labels: courses.map((course) => course.name),
+    labels: courses.map((course) => course.nombre),
     datasets: [
       {
         label: "Proyectos por curso",
@@ -77,12 +78,23 @@ const AdminView = () => {
   };
 
   const graduatesPerCourseData = {
-    labels: courses.map((course) => course.name),
+    labels: courses.map((course) => course.nombre),
     datasets: [
       {
         label: "Egresados por curso",
         data: courses.map((course) => course.graduateCount),
-        backgroundColor: ["#36A2EB", "#FF6384", "#FFCE56"],
+        backgroundColor: [
+          "#36A2EB",
+          "#FF6384",
+          "#4BC0C0",
+          "#9966FF",
+          "#C0C0C0",
+
+          "#808000",
+
+          "#D2691E",
+          "#9370DB",
+        ],
       },
     ],
   };

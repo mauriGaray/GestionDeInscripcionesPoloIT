@@ -1,5 +1,14 @@
-
 import api from "./api";
+
+export const crearEgresado = async (egresadoData) => {
+  try {
+    const response = await api.post("/egresado", egresadoData);
+    return response.data;
+  } catch (error) {
+    console.error("Error creando egresado", error);
+    throw error;
+  }
+};
 
 export const obtenerEgresados = async () => {
   try {

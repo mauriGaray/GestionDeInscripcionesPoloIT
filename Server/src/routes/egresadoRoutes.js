@@ -3,6 +3,9 @@ const router = express.Router();
 const egresadoController = require("../controllers/egresadosController");
 const { verifyRole, verifyToken } = require("../middlewares/authMiddleware");
 
+// Crear un nuevo egresado
+router.post("/", egresadoController.createEgresado);
+
 // Obtener todos los egresados
 router.get(
   "/",

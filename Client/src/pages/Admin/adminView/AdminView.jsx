@@ -2,10 +2,30 @@ import React, { useState, useEffect } from "react";
 
 import { Pie, Bar } from "react-chartjs-2";
 import Chart from "chart.js/auto";
-import { obtenerProyectos } from "../../../services/proyecto";
-import { obtenerEgresados } from "../../../services/egresado";
-import { obtenerCursos } from "../../../services/curso";
-import { obtenerMentores } from "../../../services/mentor";
+import {
+  obtenerProyectos,
+  actualizarProyecto,
+  eliminarProyecto,
+  crearProyecto,
+} from "../../../services/proyecto";
+import {
+  obtenerEgresados,
+  actualizarEgresado,
+  eliminarEgresado,
+  crearEgresado,
+} from "../../../services/egresado";
+import {
+  obtenerCursos,
+  actualizarCurso,
+  eliminarCurso,
+  crearCurso,
+} from "../../../services/curso";
+import {
+  obtenerMentores,
+  actualizarMentor,
+  eliminarMentor,
+  crearMentor,
+} from "../../../services/mentor";
 const AdminView = () => {
   const [graduates, setGraduates] = useState([]);
   const [projects, setProjects] = useState([]);
@@ -17,12 +37,10 @@ const AdminView = () => {
   useEffect(() => {
     fetchData();
   }, []);
-
   const fetchData = async () => {
     try {
       const graduate = await obtenerEgresados();
       setGraduates(graduate);
-      console.log(graduate);
 
       const project = await obtenerProyectos();
       setProjects(project);
@@ -31,9 +49,74 @@ const AdminView = () => {
       setCourses(course);
 
       const mentor = await obtenerMentores();
+
       setMentors(mentor);
     } catch (error) {
       console.log(error);
+    }
+  };
+  const handleDeleteMentor = async (documentId) => {
+    try {
+      await eliminarMentor(documentId);
+
+      fetchData();
+    } catch (error) {
+      console.error("Error borrando mentor", error);
+    }
+  };
+  const handleCreateMentor = async (mentorData) => {
+    try {
+      const response = await crearMentor(mentorData);
+      console.log(response);
+
+      fetchData();
+    } catch (error) {
+      console.error("Error creando mentor", error);
+    }
+  };
+
+  const handleUpdateMentor = async (documentId, mentorData) => {
+    try {
+      await actualizarMentor(documentId, mentorData);
+      fetchData();
+    } catch (error) {
+      console.error("Error actualizando mentor", error);
+    }
+  };
+
+  const handleDeleteGraduate = async (documentId) => {
+    try {
+      await eliminarEgresado(documentId);
+      fetchData();
+    } catch (error) {
+      console.error("Error borrando egresado", error);
+    }
+  };
+
+  const handleCreateGraduate = async (graduateData) => {
+    try {
+      const response = await crearEgresado(graduateData);
+      fetchData();
+    } catch (error) {
+      console.error("Error creando egresado", error);
+    }
+  };
+
+  const handleUpdateGraduate = async (documentId, graduateData) => {
+    try {
+      await actualizarEgresado(documentId, graduateData);
+      fetchData();
+    } catch (error) {
+      console.error("Error actualizando egresado", error);
+    }
+  };
+
+  const handleDeleteProject = async (documentId) => {
+    try {
+      await eliminarProyecto(documentId);
+      fetchData();
+    } catch (error) {
+      console.error("Error borrando proyecto", error);
     }
   };
 
@@ -307,7 +390,9 @@ const AdminView = () => {
                     <button className="bg-blue-500 text-white px-2 py-1 rounded mr-2">
                       Modificar
                     </button>
-                    <button className="bg-red-500 text-white px-2 py-1 rounded">
+                    <button
+                      onClick={() => handleDeleteGraduate(graduate.documento)}
+                      className="bg-red-500 text-white px-2 py-1 rounded">
                       Eliminar
                     </button>
                   </td>
@@ -384,7 +469,9 @@ const AdminView = () => {
                     <button className="bg-blue-500 text-white px-2 py-1 rounded mr-2">
                       Modificar
                     </button>
-                    <button className="bg-red-500 text-white px-2 py-1 rounded">
+                    <button
+                      onClick={() => handleDeleteMentor(mentor.documento)}
+                      className="bg-red-500 text-white px-2 py-1 rounded">
                       Eliminar
                     </button>
                   </td>

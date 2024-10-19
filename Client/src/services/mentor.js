@@ -20,9 +20,9 @@ export const crearMentor = async (mentorData) => {
   }
 };
 
-export const obtenerMentorPorId = async (idMentor) => {
+export const obtenerMentorPorDocumento = async (documento) => {
   try {
-    const response = await api.get(`/mentor/${idMentor}`);
+    const response = await api.get(`/mentor/${documento}`);
     return response.data;
   } catch (error) {
     console.error("Error obteniendo mentor por ID", error);
@@ -30,9 +30,9 @@ export const obtenerMentorPorId = async (idMentor) => {
   }
 };
 
-export const actualizarMentor = async (idMentor, mentorData) => {
+export const actualizarMentor = async (documento, mentorData) => {
   try {
-    const response = await api.put(`/mentor/${idMentor}`, mentorData);
+    const response = await api.put(`/mentor/${documento}`, mentorData);
     return response.data;
   } catch (error) {
     console.error("Error actualizando mentor", error);
@@ -40,9 +40,9 @@ export const actualizarMentor = async (idMentor, mentorData) => {
   }
 };
 
-export const eliminarMentor = async (idMentor) => {
+export const eliminarMentor = async (documento) => {
   try {
-    await api.delete(`/mentor/${idMentor}`);
+    await api.delete(`/mentor/${documento}`);
   } catch (error) {
     console.error("Error eliminando mentor", error);
     throw error;

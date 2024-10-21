@@ -1,0 +1,13 @@
+.login-container {
+    background-color: #ffffff1a;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+  
+.login-btn {
+    transition: background-color 0.3s ease;
+}
+
+.google-btn {
+    background-color: #ffffff4d;
+}
+  

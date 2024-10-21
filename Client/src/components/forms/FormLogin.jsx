@@ -1,45 +1,62 @@
 import React, { useState } from 'react';
-import './login.css';
+import { Link } from "react-router-dom";
+import axios from "axios";
+import "./login.css";
 
 export const FormLogin = ({setAuthState}) => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+    const baseUrl = "/api/v0";
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
+    const [tokenLogin, setTokenLogin] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Validación
-    if (!username || !password) {
+    if (!email || !password) {
       setError('Por favor, completa ambos campos.');
       return;
     }
 
-    // Lógica de autenticación (como enviar los datos a una API)
-    console.log('Usuario:', username);
-    console.log('Contraseña:', password);
-
-    // Limpiar los campos después del envío
-    setUsername('');
-    setPassword('');
-    setError('');
+    try {
+        // Enviar datos al backend usando axios
+        const response = await axios.post(`${baseUrl}/auth/login`, {
+          email,
+          password,
+        });
+  
+        // Si la respuesta es exitosa
+        setTokenLogin(response.data.token);
+  
+        // Limpiar los campos después del envío
+        setEmail("");
+        setPassword("");
+        setError("");
+    } catch (error) {
+        // Manejar errores de la solicitud
+        console.error("Error al enviar la solicitud:", error);
+        setError(error.response?.data?.message || "Error en la solicitud");
+    }
   };
 
   return (
-    <div className="login-container w-80 h-auto p-8 lg:ml-20 rounded-lg text-center">
+    <div className="login-container w-80 h-auto p-8 rounded-lg text-center">
         <h2 className="mt-0 mb-10 text-3xl text-white font-bold">BIENVENIDO</h2>
 
         {/* Mostrar el mensaje de error si existe */}
         {error && <p className="error-message">{error}</p>}
 
-        <form onSubmit={handleSubmit} className="flex flex-col justify-center items-center w-full">
+        <form 
+            onSubmit={handleSubmit} 
+            className="flex flex-col justify-center items-center w-full">
             <div className="mb-8 w-full">
                 <input className="w-full h-8 rounded-sm text-xs text-center border-solid border-[#ccc] focus:border-[#34A853] focus:outline-none"
-                    type="username"
-                    id="username"
-                    placeholder="USUARIO"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
+                    type="text"
+                    id="email"
+                    placeholder="EMAIL"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     required
                 />
             </div>
@@ -59,7 +76,7 @@ export const FormLogin = ({setAuthState}) => {
 
         </form>
         
-        <button className="google-btn flex justify-center items-center p-1 w-full text-xs text-white gap-2 cursor-pointer border-0">
+        <button className="google-btn flex justify-center items-center p-1 my-6 mx-0 w-full text-xs text-white gap-2 cursor-pointer border-0">
             Ingresá con 
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M5.26644 9.76453C6.19903 6.93863 8.85469 4.90909 12.0002 4.90909C13.6912 4.90909 15.2184 5.50909 16.4184 6.49091L19.9093 3C17.7821 1.14545 15.0548 0 12.0002 0C7.27031 0 3.19799 2.6983 1.24023 6.65002L5.26644 9.76453Z" fill="#EA4335"/>
@@ -70,10 +87,12 @@ export const FormLogin = ({setAuthState}) => {
         </button>
         <div className="flex justify-center mt-6 text-xs text-white">
             <p className="m-0">No tenés cuenta?</p>
-            <button 
-                onClick={() => setAuthState('register')}
-                className='register-btn p-0 ml-2 bg-transparent text-xs text-indigo-400 cursor-pointer border-none font-bold'>Registrate
-            </button>
+            <Link to={"/Registro"}>
+                <button 
+                    onClick={() => setAuthState('register')}
+                    className='register-btn p-0 ml-2 bg-transparent text-xs text-indigo-400 cursor-pointer border-none font-bold'>Registrate
+                </button>
+            </Link>
         </div>
     </div>
   );

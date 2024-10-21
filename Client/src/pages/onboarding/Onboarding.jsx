@@ -1,5 +1,7 @@
 // import { Link } from "react-router-dom";
 // import "./onboarding.css";
+import OnboardIl from '/onboard-il.png'
+
 // export const Onboarding = () => {
 //   return (
 //     <div className=" main-onboarding__bg onboarding p-8 flex flex-col justify-center items-center w-full min-h-screen bg-center bg-no-repeat bg-cover bg-fixed">
@@ -50,7 +52,7 @@ export const Onboarding = () => {
                     </Link> 
                 </div>
                 <div>
-                    <img src="./public/onboard-il.png" alt="" />
+                    <img src={OnboardIl} alt="" />
                 </div>
             </div>
         </div>

@@ -1,6 +1,5 @@
 const pool = require("../config/db");
 
-// Crear un nuevo proyecto
 const createProyecto = async (proyecto) => {
   const {
     nombre,
@@ -8,29 +7,69 @@ const createProyecto = async (proyecto) => {
     fecha_inicio,
     fecha_finalizacion,
     mentor_documento,
+    curso_codigo,
+    tamaño_maximo_equipo,
   } = proyecto;
+
+  const [mentor] = await pool.execute(
+    "SELECT id FROM mentor WHERE documento = ?",
+    [mentor_documento]
+  );
+
+  if (mentor.length === 0) {
+    throw new Error("Mentor no encontrado");
+  }
+
+  const mentor_id = mentor[0].id;
+
+  const [curso] = await pool.execute("SELECT id FROM Curso WHERE codigo = ?", [
+    curso_codigo,
+  ]);
+
+  if (curso.length === 0) {
+    throw new Error("Curso no encontrado");
+  }
+
+  const curso_id = curso[0].id;
+
   await pool.execute(
-    "INSERT INTO proyecto (nombre, descripcion, fecha_inicio, fecha_finalizacion, mentor_documento) VALUES (?, ?, ?, ?, ?)",
-    [nombre, descripcion, fecha_inicio, fecha_finalizacion, mentor_documento]
+    `INSERT INTO proyecto 
+    (nombre, descripcion, fecha_inicio, fecha_finalizacion, tamaño_maximo_equipo, mentor_id, curso_id)
+    VALUES (?, ?, ?, ?, ?, ?, ?)`,
+    [
+      nombre,
+      descripcion,
+      fecha_inicio,
+      fecha_finalizacion,
+      tamaño_maximo_equipo,
+      mentor_id,
+      curso_id,
+    ]
   );
 };
 
-// Obtener todos los proyectos
 const getAllProyectos = async () => {
-  const [rows] = await pool.query("SELECT * FROM proyecto");
+  const [rows] = await pool.query(
+    `SELECT proyecto.*, mentor.nombre AS nombre_mentor, curso.nombre AS nombre_curso 
+     FROM proyecto 
+     JOIN mentor ON proyecto.mentor_id = mentor.id
+     JOIN curso ON proyecto.curso_id = curso.id`
+  );
   return rows;
 };
 
-// Obtener un proyecto por ID
 const getProyectoById = async (id_proyecto) => {
   const [rows] = await pool.query(
-    "SELECT * FROM proyecto WHERE id_proyecto = ?",
+    `SELECT proyecto.*, mentor.nombre AS nombre_mentor, curso.nombre AS nombre_curso 
+     FROM proyecto 
+     JOIN mentor ON proyecto.mentor_id = mentor.id
+     JOIN curso ON proyecto.curso_id = curso.id
+     WHERE proyecto.id_proyecto = ?`,
     [id_proyecto]
   );
   return rows[0];
 };
 
-// Actualizar un proyecto por ID
 const updateProyecto = async (id_proyecto, proyecto) => {
   const {
     nombre,
@@ -39,6 +78,7 @@ const updateProyecto = async (id_proyecto, proyecto) => {
     fecha_finalizacion,
     mentor_documento,
   } = proyecto;
+
   const [result] = await pool.query(
     "UPDATE proyecto SET nombre = ?, descripcion = ?, fecha_inicio = ?, fecha_finalizacion = ?, mentor_documento = ? WHERE id_proyecto = ?",
     [
@@ -53,7 +93,6 @@ const updateProyecto = async (id_proyecto, proyecto) => {
   return result;
 };
 
-// Eliminar un proyecto por ID
 const deleteProyecto = async (id_proyecto) => {
   const [result] = await pool.query(
     "DELETE FROM proyecto WHERE id_proyecto = ?",

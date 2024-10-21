@@ -64,62 +64,6 @@ const AdminView = () => {
       console.error("Error borrando mentor", error);
     }
   };
-  const handleCreateMentor = async (mentorData) => {
-    try {
-      const response = await crearMentor(mentorData);
-      console.log(response);
-
-      fetchData();
-    } catch (error) {
-      console.error("Error creando mentor", error);
-    }
-  };
-
-  const handleUpdateMentor = async (documentId, mentorData) => {
-    try {
-      await actualizarMentor(documentId, mentorData);
-      fetchData();
-    } catch (error) {
-      console.error("Error actualizando mentor", error);
-    }
-  };
-
-  const handleDeleteGraduate = async (documentId) => {
-    try {
-      await eliminarEgresado(documentId);
-      fetchData();
-    } catch (error) {
-      console.error("Error borrando egresado", error);
-    }
-  };
-
-  const handleCreateGraduate = async (graduateData) => {
-    try {
-      const response = await crearEgresado(graduateData);
-      fetchData();
-    } catch (error) {
-      console.error("Error creando egresado", error);
-    }
-  };
-
-  const handleUpdateGraduate = async (documentId, graduateData) => {
-    try {
-      await actualizarEgresado(documentId, graduateData);
-      fetchData();
-    } catch (error) {
-      console.error("Error actualizando egresado", error);
-    }
-  };
-
-  const handleDeleteProject = async (documentId) => {
-    try {
-      await eliminarProyecto(documentId);
-      fetchData();
-    } catch (error) {
-      console.error("Error borrando proyecto", error);
-    }
-  };
-
   // Asignación aleatoria de egresados a proyectos
   const assignRandomly = () => {
     const availableGraduates = graduates.filter((grad) => grad.available);

@@ -7,7 +7,7 @@ const createProyecto = async (proyecto) => {
     fecha_inicio,
     fecha_finalizacion,
     mentor_documento,
-    curso_codigo,
+    id_curso,
     tamaño_maximo_equipo,
   } = proyecto;
 
@@ -23,7 +23,7 @@ const createProyecto = async (proyecto) => {
   const mentor_id = mentor[0].id;
 
   const [curso] = await pool.execute("SELECT id FROM Curso WHERE codigo = ?", [
-    curso_codigo,
+    id_curso,
   ]);
 
   if (curso.length === 0) {
@@ -42,7 +42,7 @@ const createProyecto = async (proyecto) => {
       fecha_inicio,
       fecha_finalizacion,
       tamaño_maximo_equipo,
-      mentor_id,
+      mentor_documento,
       curso_id,
     ]
   );
@@ -50,10 +50,11 @@ const createProyecto = async (proyecto) => {
 
 const getAllProyectos = async () => {
   const [rows] = await pool.query(
-    `SELECT proyecto.*, mentor.nombre AS nombre_mentor, curso.nombre AS nombre_curso 
-     FROM proyecto 
-     JOIN mentor ON proyecto.mentor_id = mentor.id
-     JOIN curso ON proyecto.curso_id = curso.id`
+    `SELECT proyecto.id_proyecto, proyecto.nombre, proyecto.descripcion, proyecto.fecha_inicio, proyecto.fecha_finalizacion, proyecto.tamaño_maximo_equipo,
+            mentor.documento, mentor.nombre, curso.id_curso, curso.nombre 
+     FROM proyecto
+     JOIN mentor ON proyecto.mentor_id = mentor.documento
+     JOIN curso ON proyecto.curso_id = curso.id_curso`
   );
   return rows;
 };

@@ -26,12 +26,16 @@ import {
   eliminarMentor,
   crearMentor,
 } from "../../../services/mentor";
+import { asignarEgresadosAProyectos } from "../../../services/matching";
 const AdminView = () => {
   const [graduates, setGraduates] = useState([]);
   const [projects, setProjects] = useState([]);
   const [courses, setCourses] = useState([]);
   const [mentors, setMentors] = useState([]);
-  const [assignedData, setAssignedData] = useState([]);
+  const [assignedData, setAssignedData] = useState({
+    asignaciones: [],
+    no_asignados: [],
+  });
   const [activeView, setActiveView] = useState("proyectos");
 
   useEffect(() => {
@@ -65,30 +69,13 @@ const AdminView = () => {
     }
   };
   // Asignación aleatoria de egresados a proyectos
-  const assignRandomly = () => {
-    const availableGraduates = graduates.filter((grad) => grad.available);
-    const availableProjects = projects.filter(
-      (proj) => proj.availableSpots > 0
-    );
-    let newAssignments = [];
+  const assignRandomly = async () => {
+    try {
+      const newAssignments = await asignarEgresadosAProyectos();
 
-    if (availableGraduates.length && availableProjects.length) {
-      availableGraduates.forEach((grad) => {
-        const randomProject =
-          availableProjects[
-            Math.floor(Math.random() * availableProjects.length)
-          ];
-        if (randomProject.availableSpots > 0) {
-          newAssignments.push({
-            graduate: grad.name,
-            project: randomProject.name,
-          });
-          randomProject.availableSpots -= 1;
-        }
-      });
       setAssignedData(newAssignments);
-    } else {
-      alert("No hay egresados o proyectos disponibles.");
+    } catch (error) {
+      console.error("Error asignando egresados a proyectos", error);
     }
   };
 
@@ -116,9 +103,7 @@ const AdminView = () => {
           "#4BC0C0",
           "#9966FF",
           "#C0C0C0",
-
           "#808000",
-
           "#D2691E",
           "#9370DB",
         ],
@@ -489,14 +474,31 @@ const AdminView = () => {
             onClick={assignRandomly}>
             Asignar Egresados Aleatoriamente
           </button>
+
           <div className="mt-4">
-            {assignedData.length > 0 && (
+            {/* Mostrar asignaciones si hay */}
+            {assignedData.asignaciones.length > 0 && (
               <div>
                 <h3 className="font-semibold">Asignaciones:</h3>
                 <ul>
-                  {assignedData.map((assign, index) => (
+                  {assignedData.asignaciones.map((assign, index) => (
                     <li key={index}>
-                      {assign.graduate} fue asignado a {assign.project}
+                      {assign.egresado} fue asignado a {assign.curso}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {/* Mostrar no asignados si hay */}
+            {assignedData.no_asignados.length > 0 && (
+              <div className="mt-4">
+                <h3 className="font-semibold">No Asignados:</h3>
+                <ul>
+                  {assignedData.no_asignados.map((noAssign, index) => (
+                    <li key={index}>
+                      {noAssign.egresado} del {noAssign.curso} aún no fue
+                      asignado
                     </li>
                   ))}
                 </ul>

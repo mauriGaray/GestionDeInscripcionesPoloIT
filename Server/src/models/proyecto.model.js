@@ -50,11 +50,8 @@ const createProyecto = async (proyecto) => {
 
 const getAllProyectos = async () => {
   const [rows] = await pool.query(
-    `SELECT proyecto.id_proyecto, proyecto.nombre, proyecto.descripcion, proyecto.fecha_inicio, proyecto.fecha_finalizacion, proyecto.tamaño_maximo_equipo,
-            mentor.documento, mentor.nombre, curso.id_curso, curso.nombre 
-     FROM proyecto
-     JOIN mentor ON proyecto.mentor_id = mentor.documento
-     JOIN curso ON proyecto.curso_id = curso.id_curso`
+    `SELECT id_proyecto, nombre, descripcion, tamaño_maximo_equipo, mentor_id, fecha_inicio, fecha_finalizacion, curso_id, image
+     FROM proyecto`
   );
   return rows;
 };

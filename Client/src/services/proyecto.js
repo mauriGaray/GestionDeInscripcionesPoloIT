@@ -13,7 +13,6 @@ export const crearProyecto = async (proyectoData) => {
 export const obtenerProyectos = async () => {
   try {
     const response = await api.get("/proyecto");
-    console.log(response);
 
     return response.data;
   } catch (error) {

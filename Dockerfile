@@ -5,8 +5,12 @@ WORKDIR /app
 # Copiar la carpeta Client al contenedor
 COPY Client/ ./Client
 
-# Instalar dependencias y construir el frontend
-RUN cd Client && npm install && npm run build
+# Instalar dependencias globalmente (opcional) y las del frontend
+RUN npm install -g vite
+RUN cd Client && npm install
+
+# Construir el frontend
+RUN cd Client && npm run build
 
 # Etapa 2: Configuración del backend
 FROM node:16
@@ -20,6 +24,9 @@ RUN cd Server && npm install
 
 # Copiar archivos de build del frontend al backend
 COPY --from=build /app/Client/dist ./Server/dist
+
+# Cambiar permisos (opcional, pero recomendado)
+RUN chmod -R 755 ./Server/dist
 
 # Expone el puerto del servidor
 EXPOSE 3000

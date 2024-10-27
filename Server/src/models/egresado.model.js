@@ -40,14 +40,16 @@ const createEgresado = async (egresado) => {
 
 // Obtener todos los egresados
 const getAllEgresados = async () => {
-  const [results] = await pool.query("SELECT * FROM egresado");
+  const [results] = await pool.query(
+    "SELECT egresado.*, curso.nombre FROM egresado JOIN curso ON egresado.curso_id = curso.id_curso"
+  );
   return results;
 };
 
 // Obtener un egresado por documento
 const getEgresadoByDocumento = async (documento) => {
   const [results] = await pool.query(
-    "SELECT * FROM egresado WHERE documento = ?",
+    "SELECT egresado.*, curso.nombre FROM egresado JOIN curso ON egresado.curso_id = curso.id_curso WHERE egresado.documento = ?",
     [documento]
   );
   return results[0];
@@ -55,6 +57,27 @@ const getEgresadoByDocumento = async (documento) => {
 
 // Actualizar un egresado por documento
 const updateEgresado = async (documento, egresado) => {
+  const { curso } = egresado;
+
+  let cursoId;
+
+  if (curso) {
+    // Buscar el id del curso basado en el nombre
+    const [cursoResults] = await pool.query(
+      "SELECT id_curso FROM curso WHERE nombre = ?",
+      [curso]
+    );
+
+    if (cursoResults.length === 0) {
+      throw new Error("El curso especificado no existe.");
+    }
+
+    cursoId = cursoResults[0].id_curso;
+
+    egresado.curso_id = cursoId;
+    delete egresado.curso;
+  }
+
   const [results] = await pool.query(
     "UPDATE egresado SET ? WHERE documento = ?",
     [egresado, documento]

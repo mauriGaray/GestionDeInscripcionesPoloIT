@@ -1,97 +1,58 @@
-import { Link } from 'react-router-dom';
+import MainLayout from '../../../components/layout/MainLayout';
+// import { Link } from 'react-router-dom';
+import Avatar from '/avatar.png'
 
 export const Perfil = () => {
     return (
-        <div className="bg-slate-500 p-4 min-h-screen">
-      {/* Contenedor Principal */}
-      <div className="max-w-7xl mx-auto p-6">
-        <div className="grid grid-cols-4 gap-4 min-h-screen">
-          
-          {/* Columna 1 (Datos personales) */}
-          <div className="col-span-1 bg-sky-950 p-4">
-            {/* Contenido de la primera columna */}
-            <div>
-                <img src="./public/onboard-il.png" alt="" />
+        <MainLayout>
+            <div className="h-12 pl-8 flex justify-left items-center">
+                <h2 className="text-white text-lg font-semibold">MI PERFIL</h2>  
             </div>
-            <li className="text-white list-none">
-                <Link to={'/'}>
-                    <button className="flex w-full gap-2 justify-left items-center text-white hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">
-                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="30" viewBox="0 0 32 32">
-                        <path fill="#ffffff" d="M 16 4 C 12.144531 4 9 7.144531 9 11 C 9 13.394531 10.21875 15.519531 12.0625 16.78125 C 8.484375 18.304688 6 21.859375 6 26 L 8 26 C 8 21.535156 11.535156 18 16 18 C 20.464844 18 24 21.535156 24 26 L 26 26 C 26 21.859375 23.515625 18.304688 19.9375 16.78125 C 21.78125 15.519531 23 13.394531 23 11 C 23 7.144531 19.855469 4 16 4 Z M 16 6 C 18.773438 6 21 8.226563 21 11 C 21 13.773438 18.773438 16 16 16 C 13.226563 16 11 13.773438 11 11 C 11 8.226563 13.226563 6 16 6 Z"></path>
-                        </svg>
-                        Mi Perfil
+            <div className="bg-slate-600 p-8">
+                <div className="flex w-24 h-24 mb-5 justify-end items-end">
+                    <img className="absolute z-0" src={Avatar} alt="avatar" />
+                    <button className="relative z-1">
+                        <svg width="25px" height="25px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M16 8C15.4477 8 15 8.44772 15 9C15 9.55228 15.4477 10 16 10V8ZM8 10C8.55228 10 9 9.55228 9 9C9 8.44772 8.55228 8 8 8V10ZM5.07805 19.7748L4.61708 20.6622L4.61708 20.6622L5.07805 19.7748ZM4.22517 18.9219L5.11259 18.461L5.11259 18.461L4.22517 18.9219ZM19.7748 18.9219L20.6622 19.3829L19.7748 18.9219ZM18.9219 19.7748L19.3829 20.6622L18.9219 19.7748ZM19.7748 10.0781L20.6622 9.61708L20.6622 9.61708L19.7748 10.0781ZM18.9219 9.22517L18.461 10.1126H18.461L18.9219 9.22517ZM4.22517 10.0781L3.33776 9.61708L4.22517 10.0781ZM5.07805 9.22517L4.61708 8.33776L5.07805 9.22517ZM11 14C11 14.5523 11.4477 15 12 15C12.5523 15 13 14.5523 13 14H11ZM12 4L12.7071 3.29289C12.3166 2.90237 11.6834 2.90237 11.2929 3.29289L12 4ZM13.7929 7.20711C14.1834 7.59763 14.8166 7.59763 15.2071 7.20711C15.5976 6.81658 15.5976 6.18342 15.2071 5.79289L13.7929 7.20711ZM8.79289 5.79289C8.40237 6.18342 8.40237 6.81658 8.79289 7.20711C9.18342 7.59763 9.81658 7.59763 10.2071 7.20711L8.79289 5.79289ZM19 12.22V16.78H21V12.22H19ZM16.78 19H7.22V21H16.78V19ZM5 16.78V12.22H3V16.78H5ZM16 10H16.78V8H16V10ZM7.22 10H8V8H7.22V10ZM7.22 19C6.63372 19 6.25517 18.9992 5.96722 18.9753C5.69125 18.9524 5.58924 18.9135 5.53903 18.8874L4.61708 20.6622C5.00034 20.8613 5.39982 20.935 5.8017 20.9684C6.19162 21.0008 6.66729 21 7.22 21V19ZM3 16.78C3 17.3327 2.9992 17.8084 3.03158 18.1983C3.06495 18.6002 3.13867 18.9997 3.33776 19.3829L5.11259 18.461C5.0865 18.4108 5.04763 18.3088 5.02472 18.0328C5.0008 17.7448 5 17.3663 5 16.78H3ZM5.53903 18.8874C5.35638 18.7925 5.20746 18.6436 5.11259 18.461L3.33776 19.3829C3.62239 19.9309 4.06915 20.3776 4.61708 20.6622L5.53903 18.8874ZM19 16.78C19 17.3663 18.9992 17.7448 18.9753 18.0328C18.9524 18.3088 18.9135 18.4108 18.8874 18.461L20.6622 19.3829C20.8613 18.9997 20.935 18.6002 20.9684 18.1983C21.0008 17.8084 21 17.3327 21 16.78H19ZM16.78 21C17.3327 21 17.8084 21.0008 18.1983 20.9684C18.6002 20.935 18.9997 20.8613 19.3829 20.6622L18.461 18.8874C18.4108 18.9135 18.3088 18.9524 18.0328 18.9753C17.7448 18.9992 17.3663 19 16.78 19V21ZM18.8874 18.461C18.7925 18.6436 18.6436 18.7925 18.461 18.8874L19.3829 20.6622C19.9309 20.3776 20.3776 19.9309 20.6622 19.3829L18.8874 18.461ZM21 12.22C21 11.6673 21.0008 11.1916 20.9684 10.8017C20.935 10.3998 20.8613 10.0003 20.6622 9.61708L18.8874 10.539C18.9135 10.5892 18.9524 10.6912 18.9753 10.9672C18.9992 11.2552 19 11.6337 19 12.22H21ZM16.78 10C17.3663 10 17.7448 10.0008 18.0328 10.0247C18.3088 10.0476 18.4108 10.0865 18.461 10.1126L19.3829 8.33776C18.9997 8.13867 18.6002 8.06495 18.1983 8.03158C17.8084 7.9992 17.3327 8 16.78 8V10ZM20.6622 9.61708C20.3776 9.06915 19.9309 8.62239 19.3829 8.33776L18.461 10.1126C18.6436 10.2075 18.7925 10.3564 18.8874 10.539L20.6622 9.61708ZM5 12.22C5 11.6337 5.0008 11.2552 5.02472 10.9672C5.04763 10.6912 5.0865 10.5892 5.11259 10.539L3.33776 9.61708C3.13867 10.0003 3.06495 10.3998 3.03158 10.8017C2.9992 11.1916 3 11.6673 3 12.22H5ZM7.22 8C6.66729 8 6.19162 7.9992 5.8017 8.03158C5.39981 8.06495 5.00034 8.13867 4.61708 8.33776L5.53903 10.1126C5.58924 10.0865 5.69125 10.0476 5.96722 10.0247C6.25517 10.0008 6.63372 10 7.22 10V8ZM5.11259 10.539C5.20746 10.3564 5.35638 10.2075 5.53903 10.1126L4.61708 8.33776C4.06915 8.62239 3.62239 9.06915 3.33776 9.61708L5.11259 10.539ZM13 14L13 4L11 4L11 14H13ZM11.2929 4.70711L13.7929 7.20711L15.2071 5.79289L12.7071 3.29289L11.2929 4.70711ZM11.2929 3.29289L8.79289 5.79289L10.2071 7.20711L12.7071 4.70711L11.2929 3.29289Z" fill="#ffffff"/>
+                        </svg>    
                     </button>
-                </Link>
-            </li>
-            <li className="text-white list-none">
-                <Link to={'/'}>
-                    <button className="flex w-full gap-2 justify-left items-center text-white hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 50 50">
-                        <path fill="#ffffff" d="M8.5,8c-2.4675,0 -4.5,2.0325 -4.5,4.5v23c0,2.4675 2.0325,4.5 4.5,4.5h31c2.4675,0 4.5,-2.0325 4.5,-4.5v-18c0,-2.4675 -2.0325,-4.5 -4.5,-4.5h-15.45703l-4.4707,-3.72461c-0.98821,-0.82328 -2.2331,-1.27539 -3.51953,-1.27539zM8.5,11h7.55273c0.58557,0 1.14982,0.20536 1.59961,0.58008l3.50391,2.91992l-3.50391,2.91992c-0.44979,0.37472 -1.01404,0.58008 -1.59961,0.58008h-9.05273v-5.5c0,-0.8465 0.6535,-1.5 1.5,-1.5zM24.04297,16h15.45703c0.8465,0 1.5,0.6535 1.5,1.5v18c0,0.8465 -0.6535,1.5 -1.5,1.5h-31c-0.8465,0 -1.5,-0.6535 -1.5,-1.5v-14.5h9.05273c1.28643,0 2.53132,-0.45211 3.51953,-1.27539z"></path>
-                        </svg>
-                        Proyecto
-                    </button>
-                </Link>
-            </li>
-            <li className="text-white list-none">
-                <Link to={'/'}>
-                    <button className="flex w-full gap-2 justify-left items-center text-white hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30">
-                        <path fill="#ffffff" d="M 12 2 C 7.0414839 2 3 6.0414839 3 11 C 3 15.958516 7.0414839 20 12 20 L 12 23.091797 L 13.539062 22.105469 C 15.774897 20.671437 19.852053 17.575344 20.798828 12.882812 C 20.928446 12.277558 21 11.64776 21 11 C 21 6.0414839 16.958516 2 12 2 z M 12 4 C 15.877484 4 19 7.1225161 19 11 C 19 11.504182 18.94463 11.995387 18.841797 12.472656 L 18.839844 12.480469 L 18.837891 12.486328 C 18.24375 15.434377 15.971604 17.605199 14 19.138672 L 14 17.798828 L 12.875 17.939453 C 12.574056 17.977071 12.283936 18 12 18 C 8.1225161 18 5 14.877484 5 11 C 5 7.1225161 8.1225161 4 12 4 z"></path>
-                        </svg>
-                        Chat con mi Mentor
-                    </button>
-                </Link>
-            </li>
-            <li className="text-white list-none">
-                <Link to={'/'}>
-                    <button className="flex w-full gap-2 justify-left items-center text-white hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30">       
-                    <path fill="#ffffff" d="M 4 5 L 4 23 L 19.65625 23 L 26.40625 27.8125 L 28 28.9375 L 28 5 Z M 6 7 L 26 7 L 26 25.0625 L 20.59375 21.1875 L 20.3125 21 L 6 21 Z M 16 10 C 14.894531 10 14 10.894531 14 12 C 14 13.105469 14.894531 14 16 14 C 17.105469 14 18 13.105469 18 12 C 18 10.894531 17.105469 10 16 10 Z M 10.5 12 C 9.671875 12 9 12.671875 9 13.5 C 9 14.328125 9.671875 15 10.5 15 C 11.328125 15 12 14.328125 12 13.5 C 12 12.671875 11.328125 12 10.5 12 Z M 21.5 12 C 20.671875 12 20 12.671875 20 13.5 C 20 14.328125 20.671875 15 21.5 15 C 22.328125 15 23 14.328125 23 13.5 C 23 12.671875 22.328125 12 21.5 12 Z M 16 15 C 13.125 15 12 16.734375 12 17.3125 L 12 18 L 20 18 L 20 17.3125 C 20 16.71875 18.875 15 16 15 Z M 10.5 16.125 C 8.703125 16.125 8 17.191406 8 17.5625 L 8 18 L 11 18 L 11 17.3125 C 11 17.011719 11.113281 16.609375 11.34375 16.21875 C 11.089844 16.160156 10.820313 16.125 10.5 16.125 Z M 21.5 16.125 C 21.179688 16.125 20.910156 16.160156 20.65625 16.21875 C 20.886719 16.609375 21 17.011719 21 17.3125 L 21 18 L 24 18 L 24 17.5625 C 24 17.191406 23.296875 16.125 21.5 16.125 Z"></path>
-                    </svg>
-                        Equipo
-                    </button>
-                </Link>
-            </li>
-            
-          </div>
-          
-          {/* Columna 2 (Contenido principal) */}
-          <div className="col-span-3 bg-sky-950">
-            {/* Contenido de la segunda columna */}
-            <div className="h-12 pl-4 flex justify-left items-center">
-                <h2 className="text-white text-lg font-semibold">MI PERFIL</h2>    
-            </div>
-            <div className="bg-slate-600 p-4 min-h-screen">
-                <div className="flex">
-                    <p>NOMBRE:</p><p>Nombre</p>
                 </div>
-                <div className="flex">
-                    <p>APELLIDO:</p><p>Apellido</p>
+                <div className="flex flex-col mb-4 text-white">
+                    <p className="text-sm">Mail:</p>
+                    <p className="flex w-full md:w-80 h-8 pl-2 rounded-md justify-left items-center bg-slate-400 text-sm">Mail</p>
                 </div>
-                <div className="flex">
-                    <p>DOCUMENTO:</p><p>Numero de documento</p>
+                <div className="flex flex-col mb-4 text-white">
+                    <p className="text-sm">Nombres:</p>
+                    <p className="flex w-full md:w-80 h-8 pl-2 rounded-md justify-left items-center bg-slate-400 text-sm">Nombre</p>
                 </div>
-                <div className="flex">
-                    <p>GENERO:</p><p>Genero</p>
+                <div className="flex flex-col mb-4 text-white">
+                    <p className="text-sm">Apellidos:</p>
+                    <p className="flex w-full md:w-80 h-8 pl-2 rounded-md justify-left items-center bg-slate-400 text-sm">Apellidos</p>
                 </div>
-                <div className="flex">
-                    <p>EMAIL:</p><p>Email</p>
+                <div className="flex flex-col mb-4 text-white">
+                    <p className="text-sm">Documento:</p>
+                    <p className="flex w-full md:w-80 h-8 pl-2 rounded-md justify-left items-center bg-slate-400 text-sm">Numero de documento</p>
                 </div>
-                <div className="flex">
-                    <p>NACIONALIDAD:</p><p>Nacionalidad</p>
+                <div className="flex flex-col mb-4 text-white">
+                    <p className="text-sm">Nacionalidad:</p>
+                    <p className="flex w-full md:w-80 h-8 pl-2 rounded-md justify-left items-center bg-slate-400 text-sm">Nacionalidad</p>
                 </div>
-                <div className="flex">
-                    <p>CIUDAD:</p><p>Ciudad</p>
+                <div className="flex flex-col mb-4 text-white">
+                    <p className="text-sm">Ciudad:</p>
+                    <p className="flex w-full md:w-80 h-8 pl-2 rounded-md justify-left items-center bg-slate-400 text-sm">Ciudad</p>
                 </div>
-                <div className="flex">
-                    <p>PROVINCIA:</p><p>Provincia</p>
+                <div className="flex flex-col mb-4 text-white">
+                    <p className="text-sm">Provincia:</p>
+                    <p className="flex w-full md:w-80 h-8 pl-2 rounded-md justify-left items-center bg-slate-400 text-sm">Provincia</p>
+                </div>
+                <div className="flex flex-col mb-4 text-white">
+                    <p className="text-sm">Género:</p>
+                    <p className="flex w-full md:w-80 h-8 pl-2 rounded-md justify-left items-center bg-slate-400 text-sm">Genero</p>
+                </div>
+                <div>
+                    <button className="w-32 min-h-10 p-2 mt-4 bg-green-600 font-semibold text-white text-sm rounded cursor-pointer">EDITAR PERFIL</button>
                 </div>
             </div>
-          </div>
-          
-        </div>
-      </div>
-    </div>
+        </MainLayout>
     );
 }

@@ -16,6 +16,7 @@ const createProyecto = async (req, res) => {
 const getAllProyectos = async (req, res) => {
   try {
     const proyectos = await proyectoModel.getAllProyectos();
+
     res.status(200).json(proyectos);
   } catch (error) {
     console.error("Error al obtener los proyectos:", error.message);

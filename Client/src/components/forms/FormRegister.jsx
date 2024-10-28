@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 export const FormRegister = () => {
 
@@ -22,9 +23,34 @@ export const FormRegister = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   console.log(formData);
+  // };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
+  
+    try {
+      const response = await axios.post('/api/v0', formData, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+  
+      if (response.status === 200) {
+        // Registro exitoso
+        console.log('Usuario registrado:', response.data);
+        alert('Registro exitoso!');
+        // Puedes redirigir al usuario o limpiar el formulario aquí
+      } else {
+        console.error('Error al registrar:', response.data);
+        alert('Hubo un problema con el registro.');
+      }
+    } catch (error) {
+      console.error('Error en la solicitud:', error);
+      alert('No se pudo conectar con el servidor.');
+    }
   };
 
   return (
@@ -96,8 +122,8 @@ export const FormRegister = () => {
               </label>
               <input
                 id="contraseña"
-                name="contraseña"
-                type="contraseña"
+                name="password"
+                type="password"
                 value={formData.password}
                 onChange={handleChange}
                 className="w-full px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"

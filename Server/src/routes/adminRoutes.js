@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
+const adminController = require("../controllers/adminController");
 const { verifyRole, verifyToken } = require("../middlewares/authMiddleware");
 //Routes
 
-router.put("/perfil", verifyToken, verifyRole(["admin"]), (req, res) => {
-  res.send("Actualizando perfil");
-});
+router.put("/updatePerfilAdmin", adminController.updateAdmin);
+router.get("/perfilAdmin", adminController.getAdmin);
 
 module.exports = router;

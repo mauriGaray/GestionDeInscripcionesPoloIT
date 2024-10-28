@@ -27,6 +27,7 @@ import {
   crearMentor,
 } from "../../../services/mentor";
 import { asignarEgresadosAProyectos } from "../../../services/matching";
+import transformarFecha from "../../../utils/dateTransfor";
 const AdminView = () => {
   const [graduates, setGraduates] = useState([]);
   const [projects, setProjects] = useState([]);
@@ -126,10 +127,10 @@ const AdminView = () => {
   // Sección de Proyectos
   const renderProjects = () => (
     <div className="bg-white shadow rounded-lg p-6 mb-8">
-      <h2 className="text-2xl font-semibold mb-4 bg-gray-200 p-4">
+      <h2 className="text-xl sm:text-2xl font-semibold mb-4 bg-gray-200 p-4 flex items-center">
         Proyectos
         <button
-          className="bg-green-500 text-white px-2 py-2 rounded mx-4"
+          className="bg-green-500 text-white px-1 py-1 sm:px-2 sm:py-2 rounded mx-4 text-sm sm:text-base"
           onClick={() => alert("Agregar nuevo elemento")}>
           Agregar
         </button>
@@ -172,22 +173,24 @@ const AdminView = () => {
                     {project.descripcion}
                   </td>
                   <td className="px-4 py-2 border border-gray-400">
-                    {project.curso_id}
+                    {project.nombre_curso}
                   </td>
                   <td className="px-4 py-2 border border-gray-400">
                     {project.mentor_id || "No tiene mentor asignado"}
                   </td>
                   <td className="px-4 py-2 border border-gray-400">
-                    {project.fecha_inicio}
+                    {transformarFecha(project.fecha_inicio) ||
+                      "No tiene fecha de inicio"}
                   </td>
                   <td className="px-2 py-2 border border-gray-400">
-                    {project.fecha_finalizacion}
+                    {transformarFecha(project.fecha_finalizacion) ||
+                      "No tiene fecha de finalización"}
                   </td>
-                  <td className="px-4 py-2 border border-gray-400">
-                    <button className="bg-blue-500 text-white px-2 py-1 rounded mr-2">
+                  <td className="  px-4 py-2 flex items-center justify-center h-20">
+                    <button className="bg-blue-500 text-white w-24 py-1 rounded mr-2">
                       Modificar
                     </button>
-                    <button className="bg-red-500 text-white px-2 py-1 rounded">
+                    <button className="bg-red-500 text-white w-24 py-1 rounded">
                       Eliminar
                     </button>
                   </td>
@@ -203,10 +206,10 @@ const AdminView = () => {
   // Sección de Cursos
   const renderCourses = () => (
     <div className="bg-white shadow rounded-lg p-6 mb-8">
-      <h2 className="text-2xl font-semibold mb-4 bg-gray-200 p-4">
+      <h2 className="text-xl sm:text-2xl font-semibold mb-4 bg-gray-200 p-4 flex items-center">
         Cursos
         <button
-          className="bg-green-500 text-white px-2 py-2 rounded mx-4"
+          className="bg-green-500 text-white px-1 py-1 sm:px-2 sm:py-2 rounded mx-4 text-sm sm:text-base"
           onClick={() => alert("Agregar nuevo elemento")}>
           Agregar
         </button>
@@ -237,7 +240,7 @@ const AdminView = () => {
               {courses.map((course, index) => (
                 <tr key={index} className="border-t">
                   <td className="px-4 py-2 border border-gray-400">
-                    {course.nombre}
+                    {course.nombre_curso}
                   </td>
                   <td className="px-4 py-2 border border-gray-400">
                     {course.ONG || "No tiene ONG asignada"}
@@ -268,10 +271,10 @@ const AdminView = () => {
   // Sección de Egresados
   const renderGraduates = () => (
     <div className="bg-white shadow rounded-lg p-6 mb-8">
-      <h2 className="text-2xl font-semibold mb-4 bg-gray-200 p-4">
+      <h2 className="text-xl sm:text-2xl font-semibold mb-4 bg-gray-200 p-4 flex items-center">
         Egresados
         <button
-          className="bg-green-500 text-white px-2 py-2 rounded mx-4"
+          className="bg-green-500 text-white px-1 py-1 sm:px-2 sm:py-2 rounded mx-4 text-sm sm:text-base"
           onClick={() => alert("Agregar nuevo elemento")}>
           Agregar
         </button>
@@ -308,7 +311,7 @@ const AdminView = () => {
                     {graduate.apellido}
                   </td>
                   <td className="px-4 py-2 border border-gray-400">
-                    {graduate.curso_id}
+                    {graduate.nombre_curso}
                   </td>
                   <td className="px-4 py-2 border border-gray-400">
                     {graduate.email}
@@ -317,9 +320,7 @@ const AdminView = () => {
                     <button className="bg-blue-500 text-white px-2 py-1 rounded mr-2">
                       Modificar
                     </button>
-                    <button
-                      onClick={() => handleDeleteGraduate(graduate.documento)}
-                      className="bg-red-500 text-white px-2 py-1 rounded">
+                    <button className="bg-red-500 text-white px-2 py-1 rounded">
                       Eliminar
                     </button>
                   </td>
@@ -335,10 +336,10 @@ const AdminView = () => {
   // Sección de Mentores
   const renderMentors = () => (
     <div className="bg-white shadow rounded-lg p-6 mb-8">
-      <h2 className="text-2xl font-semibold mb-4 bg-gray-200 p-4">
+      <h2 className="text-xl sm:text-2xl font-semibold mb-4 bg-gray-200 p-4 flex items-center">
         Mentores
         <button
-          className="bg-green-500 text-white px-2 py-2 rounded mx-4"
+          className="bg-green-500 text-white px-1 py-1 sm:px-2 sm:py-2 rounded mx-4 text-sm sm:text-base"
           onClick={() => alert("Agregar nuevo elemento")}>
           Agregar
         </button>
@@ -416,8 +417,9 @@ const AdminView = () => {
       <h1 className="text-3xl font-bold mb-6">
         Bienvenido Nombre de administrador!
       </h1>
+
       <div className="bg-gray-100 shadow rounded-lg p-6 mb-8 ">
-        <div className="flex space-x-4 mb-4  ">
+        <div className="flex flex-col sm:flex-row sm:justify-center space-y-4 sm:space-y-0 sm:space-x-4 mb-4 overflow-x-auto">
           <button
             className="bg-gray-200 p-2 rounded hover:bg-slate-500"
             onClick={() => setActiveView("proyectos")}>

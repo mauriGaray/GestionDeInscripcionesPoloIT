@@ -41,7 +41,7 @@ const createEgresado = async (egresado) => {
 // Obtener todos los egresados
 const getAllEgresados = async () => {
   const [results] = await pool.query(
-    "SELECT egresado.*, curso.nombre FROM egresado JOIN curso ON egresado.curso_id = curso.id_curso"
+    "SELECT egresado.*, curso.nombre_curso FROM egresado JOIN curso ON egresado.curso_id = curso.id_curso"
   );
   return results;
 };

@@ -9,7 +9,6 @@ import { Register } from "./pages/register/Register";
 import { Perfil } from "./pages/profile/perfil/Perfil";
 import { Mentor } from "./pages/profile/mentor/Mentor";
 import { Proyecto } from "./pages/profile/proyecto/Proyecto";
-// import { Equipo } from './pages/profile/equipo/Equipo';
 import { Footer } from "./components/layout/Footer";
 import { NotFound } from "./pages/not found/NotFound";
 import AdminView from "./pages/Admin/adminView/AdminView";
@@ -26,7 +25,6 @@ function App() {
         <Route path="/perfil" element={<Perfil />} />
         <Route path="/mentor" element={<Mentor />} />
         <Route path="/proyecto" element={<Proyecto />} />
-        {/* <Route path='/Equipo' element = {<Equipo/>}/> */}
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />

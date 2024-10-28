@@ -1,8 +1,26 @@
 import MainLayout from '../../../components/layout/MainLayout';
 // import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 import Avatar from '/avatar.png'
+import { obtenerEgresados} from "../../../services/egresado";
 
 export const Perfil = () => {
+
+    const [graduates, setGraduates] = useState([]);
+    
+    useEffect(() => {
+        fetchData();
+      }, []);
+      const fetchData = async () => {
+        try {    
+            const graduate = await obtenerEgresados();
+            setGraduates(graduate);
+
+        } catch (error) {
+          console.log(error);
+        }
+      };
+
     return (
         <MainLayout>
             <div className="h-12 pl-8 flex justify-left items-center">
@@ -19,35 +37,35 @@ export const Perfil = () => {
                 </div>
                 <div className="flex flex-col mb-4 text-white">
                     <p className="text-sm">Mail:</p>
-                    <p className="flex w-full md:w-80 h-8 pl-2 rounded-md justify-left items-center bg-slate-400 text-sm">Mail</p>
+                    <p className="flex w-full md:w-80 min-h-8 h-auto pl-2 rounded-md justify-left items-center bg-slate-400 text-sm">{graduates.email}</p>
                 </div>
                 <div className="flex flex-col mb-4 text-white">
                     <p className="text-sm">Nombres:</p>
-                    <p className="flex w-full md:w-80 h-8 pl-2 rounded-md justify-left items-center bg-slate-400 text-sm">Nombre</p>
+                    <p className="flex w-full md:w-80 min-h-8 h-auto pl-2 rounded-md justify-left items-center bg-slate-400 text-sm">{graduates.nombre}</p>
                 </div>
                 <div className="flex flex-col mb-4 text-white">
                     <p className="text-sm">Apellidos:</p>
-                    <p className="flex w-full md:w-80 h-8 pl-2 rounded-md justify-left items-center bg-slate-400 text-sm">Apellidos</p>
+                    <p className="flex w-full md:w-80 min-h-8 h-auto pl-2 rounded-md justify-left items-center bg-slate-400 text-sm">{graduates.apellido}</p>
                 </div>
                 <div className="flex flex-col mb-4 text-white">
                     <p className="text-sm">Documento:</p>
-                    <p className="flex w-full md:w-80 h-8 pl-2 rounded-md justify-left items-center bg-slate-400 text-sm">Numero de documento</p>
+                    <p className="flex w-full md:w-80 min-h-8 h-auto pl-2 rounded-md justify-left items-center bg-slate-400 text-sm">{graduates.documento}</p>
                 </div>
                 <div className="flex flex-col mb-4 text-white">
                     <p className="text-sm">Nacionalidad:</p>
-                    <p className="flex w-full md:w-80 h-8 pl-2 rounded-md justify-left items-center bg-slate-400 text-sm">Nacionalidad</p>
+                    <p className="flex w-full md:w-80 min-h-8 h-auto pl-2 rounded-md justify-left items-center bg-slate-400 text-sm">{graduates.nacionalidad}</p>
                 </div>
                 <div className="flex flex-col mb-4 text-white">
                     <p className="text-sm">Ciudad:</p>
-                    <p className="flex w-full md:w-80 h-8 pl-2 rounded-md justify-left items-center bg-slate-400 text-sm">Ciudad</p>
+                    <p className="flex w-full md:w-80 min-h-8 h-auto pl-2 rounded-md justify-left items-center bg-slate-400 text-sm">{graduates.ciudad}</p>
                 </div>
                 <div className="flex flex-col mb-4 text-white">
                     <p className="text-sm">Provincia:</p>
-                    <p className="flex w-full md:w-80 h-8 pl-2 rounded-md justify-left items-center bg-slate-400 text-sm">Provincia</p>
+                    <p className="flex w-full md:w-80 min-h-8 h-auto pl-2 rounded-md justify-left items-center bg-slate-400 text-sm">{graduates.provincia}</p>
                 </div>
                 <div className="flex flex-col mb-4 text-white">
                     <p className="text-sm">Género:</p>
-                    <p className="flex w-full md:w-80 h-8 pl-2 rounded-md justify-left items-center bg-slate-400 text-sm">Genero</p>
+                    <p className="flex w-full md:w-80 min-h-8 h-auto pl-2 rounded-md justify-left items-center bg-slate-400 text-sm">{graduates.genero}</p>
                 </div>
                 <div>
                     <button className="w-32 min-h-10 p-2 mt-4 bg-green-600 font-semibold text-white text-sm rounded cursor-pointer">EDITAR PERFIL</button>

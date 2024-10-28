@@ -4,7 +4,7 @@ import Logo from "/logo.png";
 export const Footer = () => {
   return (
     <footer className="p-4 w-full h-28 bg-indigo-100 flex justify-center items-center">
-      <div className="max-w-7xl w-full flex justify-between items-center">
+      <div className="max-w-7xl w-full flex flex-col justify-between items-center gap-4 sm:flex-row">
         <div>
           <Link to={"/"}>
             <img

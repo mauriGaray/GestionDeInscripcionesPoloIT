@@ -50,9 +50,17 @@ const createProyecto = async (proyecto) => {
 
 const getAllProyectos = async () => {
   const [rows] = await pool.query(
-    `SELECT id_proyecto, nombre, descripcion, tamaño_maximo_equipo, mentor_id, fecha_inicio, fecha_finalizacion, curso_id, image
-     FROM proyecto`
+    `SELECT proyecto.id_proyecto, proyecto.nombre, proyecto.descripcion, proyecto.tamaño_maximo_equipo, 
+            proyecto.mentor_id, proyecto.fecha_inicio, proyecto.fecha_finalizacion, 
+            curso.nombre_curso, proyecto.image
+     FROM proyecto
+     JOIN curso ON proyecto.curso_id = curso.id_curso`
   );
+
+  if (rows.length === 0) {
+    console.log("No se encontraron proyectos o cursos asociados.");
+  }
+
   return rows;
 };
 

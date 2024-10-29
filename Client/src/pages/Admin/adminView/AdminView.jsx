@@ -11,21 +11,9 @@ import {
 import {
   obtenerEgresados,
   actualizarEgresado,
-  eliminarEgresado,
-  crearEgresado,
 } from "../../../services/egresado";
-import {
-  obtenerCursos,
-  actualizarCurso,
-  eliminarCurso,
-  crearCurso,
-} from "../../../services/curso";
-import {
-  obtenerMentores,
-  actualizarMentor,
-  eliminarMentor,
-  crearMentor,
-} from "../../../services/mentor";
+import { obtenerCursos } from "../../../services/curso";
+import { obtenerMentores, eliminarMentor } from "../../../services/mentor";
 import { asignarEgresadosAProyectos } from "../../../services/matching";
 import transformarFecha from "../../../utils/dateTransfor";
 const AdminView = () => {
@@ -69,7 +57,7 @@ const AdminView = () => {
       console.error("Error borrando mentor", error);
     }
   };
-  // Asignación aleatoria de egresados a proyectos
+
   const assignRandomly = async () => {
     try {
       const newAssignments = await asignarEgresadosAProyectos();
@@ -98,14 +86,7 @@ const AdminView = () => {
       {
         label: "Egresados por curso",
         data: courses.map((course) => course.graduateCount),
-        backgroundColor: [
-          "#36A2EB",
-          "#FF6384",
-          "#4BC0C0",
-          "#9966FF",
-
-          "#9370DB",
-        ],
+        backgroundColor: ["#36A2EB", "#FF6384", "#9370DB"],
       },
     ],
   };

@@ -2,12 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import { Pie, Bar } from "react-chartjs-2";
 import Chart from "chart.js/auto";
-import {
-  obtenerProyectos,
-  actualizarProyecto,
-  eliminarProyecto,
-  crearProyecto,
-} from "../../../services/proyecto";
+import { obtenerProyectos } from "../../../services/proyecto";
 import {
   obtenerEgresados,
   actualizarEgresado,

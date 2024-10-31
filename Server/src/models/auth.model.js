@@ -1,6 +1,4 @@
-const pool = require("../config/db"); // Suponiendo que tienes configurada la conexión en db.js
-
-// Buscar al usuario por email (en Egresado o Mentor)
+const pool = require("../config/db");
 const findUserByEmail = async (email) => {
   const [rows] = await pool.query(
     `SELECT documento, nombre, apellido, email, contraseña, 'egresado' AS rol 

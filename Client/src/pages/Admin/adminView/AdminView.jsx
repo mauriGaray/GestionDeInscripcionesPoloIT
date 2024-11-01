@@ -3,10 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Pie, Bar } from "react-chartjs-2";
 import Chart from "chart.js/auto";
 import { obtenerProyectos } from "../../../services/proyecto";
-import {
-  obtenerEgresados,
-  actualizarEgresado,
-} from "../../../services/egresado";
+import { obtenerEgresados } from "../../../services/egresado";
 import { obtenerCursos } from "../../../services/curso";
 import { obtenerMentores, eliminarMentor } from "../../../services/mentor";
 import { asignarEgresadosAProyectos } from "../../../services/matching";

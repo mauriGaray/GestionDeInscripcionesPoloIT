@@ -7,12 +7,10 @@ const path = require("path");
 const { error404, error500 } = require("./src/controllers/errorController");
 const db = require("./src/config/db");
 
-// Inicializar aplicación Express
 const app = express();
 
-// Configuración del puerto
 const PORT = process.env.PORT || 3000;
-// Middleware para habilitar CORS
+
 app.use(cors());
 
 // Importar rutas

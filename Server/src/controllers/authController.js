@@ -22,7 +22,6 @@ async function register(req, res) {
   } = req.body;
 
   try {
-    // Verificar si el egresado ya existe
     const existingEgresado = await egresadoModel.findEgresadoByEmail(email);
     if (existingEgresado) {
       return res.status(400).json("El egresado ya está registrado.");

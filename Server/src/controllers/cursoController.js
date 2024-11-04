@@ -1,5 +1,5 @@
 const cursoModel = require("../models/cursos.model");
-// Crear un nuevo curso
+
 const createCurso = async (req, res) => {
   const curso = req.body;
   try {
@@ -13,7 +13,6 @@ const createCurso = async (req, res) => {
   }
 };
 
-// Obtener todos los cursos
 const getAllCursos = async (req, res) => {
   try {
     const cursos = await cursoModel.getAllCursos();

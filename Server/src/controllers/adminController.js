@@ -1,7 +1,7 @@
 const adminController = require("../models/admin.model");
 
 const getAdmin = async (req, res) => {
-  const { dniAdmin } = req.body; // Obtener documento desde req.body
+  const { dniAdmin } = req.body;
   try {
     const admin = await adminController.getAdminPerfil(dniAdmin);
     if (!admin) {

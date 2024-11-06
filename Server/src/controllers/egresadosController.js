@@ -23,7 +23,6 @@ exports.getAllEgresados = async (req, res) => {
   }
 };
 
-// Obtener un egresado por documento
 exports.getEgresadoByDocumento = async (req, res) => {
   try {
     const documento = req.params.documento;
@@ -36,7 +35,6 @@ exports.getEgresadoByDocumento = async (req, res) => {
   }
 };
 
-// Actualizar un egresado por documento
 exports.updateEgresado = async (req, res) => {
   try {
     const documento = req.params.documento;

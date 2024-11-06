@@ -23,7 +23,7 @@ const getAllCursos = async (req, res) => {
   }
 };
 
-// Obtener un curso por ID
+
 const getCursoById = async (req, res) => {
   const { id_curso } = req.params;
   try {
@@ -39,7 +39,7 @@ const getCursoById = async (req, res) => {
   }
 };
 
-// Actualizar un curso por ID
+
 const updateCurso = async (req, res) => {
   const { id_curso } = req.params;
   const curso = req.body;
@@ -56,7 +56,7 @@ const updateCurso = async (req, res) => {
   }
 };
 
-// Eliminar un curso por ID
+
 const deleteCurso = async (req, res) => {
   const { id_curso } = req.params;
   try {

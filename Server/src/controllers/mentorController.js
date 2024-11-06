@@ -1,7 +1,5 @@
-// Crear un nuevo mentor
 const mentorModel = require("../models/mentor.model");
 
-// Crear un nuevo mentor
 exports.createMentor = async (req, res) => {
   const { nombre, apellido, email, clave, tecnologia, empresa_asociada } =
     req.body;
@@ -22,7 +20,6 @@ exports.createMentor = async (req, res) => {
   }
 };
 
-// Obtener todos los mentores
 exports.getAllMentores = async (req, res) => {
   try {
     const mentores = await mentorModel.getAllMentores();
@@ -33,7 +30,6 @@ exports.getAllMentores = async (req, res) => {
   }
 };
 
-// Obtener un mentor por ID
 exports.getMentorById = async (req, res) => {
   const { id_mentor } = req.params;
 
@@ -49,7 +45,6 @@ exports.getMentorById = async (req, res) => {
   }
 };
 
-// Actualizar un mentor por ID
 exports.updateMentor = async (req, res) => {
   const { id_mentor } = req.params;
   const { nombre, apellido, email, clave, tecnologia, empresa_asociada } =
@@ -74,7 +69,6 @@ exports.updateMentor = async (req, res) => {
   }
 };
 
-// Eliminar un mentor por ID
 exports.deleteMentor = async (req, res) => {
   const { id_mentor } = req.params;
 

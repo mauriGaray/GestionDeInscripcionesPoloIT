@@ -28,4 +28,4 @@ exports.uploadImage = (req, res) => {
   }
 };
 
-exports.uploadMiddleware = upload.single("image"); // 'image' es el nombre del campo que se espera en el formulario
+exports.uploadMiddleware = upload.single("image");

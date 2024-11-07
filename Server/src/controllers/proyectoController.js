@@ -12,7 +12,6 @@ const createProyecto = async (req, res) => {
   }
 };
 
-// Obtener todos los proyectos
 const getAllProyectos = async (req, res) => {
   try {
     const proyectos = await proyectoModel.getAllProyectos();
@@ -24,7 +23,6 @@ const getAllProyectos = async (req, res) => {
   }
 };
 
-// Obtener un proyecto por ID
 const getProyectoById = async (req, res) => {
   const { id_proyecto } = req.params;
   try {
@@ -40,7 +38,6 @@ const getProyectoById = async (req, res) => {
   }
 };
 
-// Actualizar un proyecto por ID
 const updateProyecto = async (req, res) => {
   const { id_proyecto } = req.params;
   const proyecto = req.body;
@@ -57,7 +54,6 @@ const updateProyecto = async (req, res) => {
   }
 };
 
-// Eliminar un proyecto por ID
 const deleteProyecto = async (req, res) => {
   const { id_proyecto } = req.params;
   try {

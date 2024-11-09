@@ -12,7 +12,7 @@ exports.createEgresado = async (req, res) => {
   }
 };
 
-// Obtener todos los egresados
+
 exports.getAllEgresados = async (req, res) => {
   try {
     const results = await egresadoModel.getAllEgresados();
@@ -46,7 +46,6 @@ exports.updateEgresado = async (req, res) => {
   }
 };
 
-// Eliminar un egresado por documento
 exports.deleteEgresado = async (req, res) => {
   try {
     const documento = req.params.documento;

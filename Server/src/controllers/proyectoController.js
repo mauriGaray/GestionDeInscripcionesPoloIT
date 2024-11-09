@@ -1,6 +1,5 @@
 const proyectoModel = require("../models/proyecto.model");
 
-// Crear un nuevo proyecto
 const createProyecto = async (req, res) => {
   const proyecto = req.body;
   try {

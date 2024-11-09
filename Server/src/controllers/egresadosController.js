@@ -1,6 +1,6 @@
 const egresadoModel = require("../models/egresado.model");
 
-// Crear un nuevo egresado
+
 exports.createEgresado = async (req, res) => {
   try {
     const egresado = req.body;

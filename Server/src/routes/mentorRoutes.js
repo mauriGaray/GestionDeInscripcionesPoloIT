@@ -10,14 +10,14 @@ router.post(
   mentorController.createMentor
 );
 
-// Obtener todos los mentores
+
 router.get(
   "/",
 
   mentorController.getAllMentores
 );
 
-// Obtener un mentor por ID
+
 router.get(
   "/:id_mentor",
 

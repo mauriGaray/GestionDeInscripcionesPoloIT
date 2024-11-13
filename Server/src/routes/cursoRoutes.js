@@ -2,21 +2,19 @@ const express = require("express");
 const router = express.Router();
 const cursoController = require("../controllers/cursoController");
 const { verifyRole, verifyToken } = require("../middlewares/authMiddleware");
-// Crear un nuevo curso
+
 router.post(
   "/",
 
   cursoController.createCurso
 );
 
-// Obtener todos los cursos
 router.get(
   "/",
 
   cursoController.getAllCursos
 );
 
-// Obtener un curso por ID
 router.get(
   "/:id_curso",
 

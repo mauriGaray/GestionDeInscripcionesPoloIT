@@ -3,20 +3,17 @@ const router = express.Router();
 const mentorController = require("../controllers/mentorController");
 const { verifyRole, verifyToken } = require("../middlewares/authMiddleware");
 
-// Crear un nuevo mentor
 router.post(
   "/",
 
   mentorController.createMentor
 );
 
-
 router.get(
   "/",
 
   mentorController.getAllMentores
 );
-
 
 router.get(
   "/:id_mentor",
@@ -31,7 +28,6 @@ router.put(
   mentorController.updateMentor
 );
 
-// Eliminar un mentor por ID
 router.delete(
   "/:id_mentor",
 

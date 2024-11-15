@@ -21,7 +21,7 @@ router.get(
   mentorController.getMentorById
 );
 
-// Actualizar un mentor por ID
+
 router.put(
   "/:id_mentor",
 

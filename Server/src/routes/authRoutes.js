@@ -9,7 +9,6 @@ router.post("/register", authController.verifyToken, authController.register);
 // Ruta para iniciar sesión
 router.post("/login", authController.login);
 
-// Ruta protegida (requiere autenticación)
 router.get(
   "/protected",
   authMiddleware.verifyToken,

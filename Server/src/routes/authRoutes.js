@@ -6,7 +6,7 @@ const authMiddleware = require("../middlewares/authMiddleware");
 // Ruta para registrar un nuevo egresado
 router.post("/register", authController.verifyToken, authController.register);
 
-// Ruta para iniciar sesión
+
 router.post("/login", authController.login);
 
 router.get(

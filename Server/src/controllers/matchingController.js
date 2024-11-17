@@ -11,11 +11,9 @@ async function asignarEgresadosAProyectos() {
       return { error: "No hay egresados sin proyecto disponibles." };
     }
 
-    // Obtener todos los proyectos con espacio disponible
     const proyectosConLugar =
       await asignacionesModel.obtenerProyectosConLugar();
 
-    // Validación: asegurarse de que proyectosConLugar no sea undefined o null
     if (!proyectosConLugar || proyectosConLugar.length === 0) {
       return { error: "No hay proyectos disponibles con espacio." };
     }

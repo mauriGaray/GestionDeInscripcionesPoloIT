@@ -21,7 +21,6 @@ router.get(
   cursoController.getCursoById
 );
 
-// Actualizar un curso por ID
 router.put(
   "/:id_curso",
 

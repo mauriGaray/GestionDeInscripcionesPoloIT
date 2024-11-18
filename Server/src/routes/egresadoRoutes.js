@@ -27,7 +27,6 @@ router.put(
   egresadoController.updateEgresado
 );
 
-// Eliminar un egresado por documento
 router.delete(
   "/:documento",
 

@@ -97,7 +97,6 @@ const AdminView = () => {
     }
   };
 
-  // Sección de Proyectos
   const renderProjects = () => (
     <div className="bg-white shadow rounded-lg p-6 mb-8">
       <h2 className="text-xl sm:text-2xl font-semibold mb-4 bg-gray-200 p-4 flex items-center">

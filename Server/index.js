@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 
-// Importar rutas
+
 const egresadoRoutes = require("./src/routes/egresadoRoutes");
 const mentorRoutes = require("./src/routes/mentorRoutes");
 const adminRoutes = require("./src/routes/adminRoutes");

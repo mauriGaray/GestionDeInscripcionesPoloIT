@@ -3,7 +3,7 @@ const router = express.Router();
 const authController = require("../controllers/authController");
 const authMiddleware = require("../middlewares/authMiddleware");
 
-// Ruta para registrar un nuevo egresado
+
 router.post("/register", authController.verifyToken, authController.register);
 
 

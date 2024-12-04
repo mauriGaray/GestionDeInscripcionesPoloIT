@@ -20,7 +20,6 @@ router.get(
   egresadoController.getEgresadoByDocumento
 );
 
-// Actualizar un egresado por documento
 router.put(
   "/:documento",
 

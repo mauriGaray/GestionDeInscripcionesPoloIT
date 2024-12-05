@@ -83,7 +83,7 @@ const AdminView = () => {
     ],
   };
 
-  // Renderizar las vistas
+
   const renderView = () => {
     switch (activeView) {
       case "cursos":

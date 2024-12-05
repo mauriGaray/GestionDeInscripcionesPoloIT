@@ -27,7 +27,7 @@ router.put(
   cursoController.updateCurso
 );
 
-// Eliminar un curso por ID
+
 router.delete(
   "/:id_curso",
 

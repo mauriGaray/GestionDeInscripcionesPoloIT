@@ -13,7 +13,7 @@ router.get(
   egresadoController.getAllEgresados
 );
 
-// Obtener un egresado por documento
+
 router.get(
   "/:documento",
 

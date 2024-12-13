@@ -2,11 +2,9 @@ const asignacionesModel = require("../models/matching.model");
 
 async function asignarEgresadosAProyectos() {
   try {
-   
     const egresadosSinProyecto =
       await asignacionesModel.obtenerEgresadosSinProyecto();
 
-    // Validación: asegurarse de que egresadosSinProyecto no sea undefined o null
     if (!egresadosSinProyecto || egresadosSinProyecto.length === 0) {
       return { error: "No hay egresados sin proyecto disponibles." };
     }

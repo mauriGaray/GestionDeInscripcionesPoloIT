@@ -18,7 +18,7 @@ async function asignarEgresadosAProyectos() {
 
     let asignaciones = [];
     let noAsignados = [];
-    let nuevasAsignaciones = []; // Almacenar las nuevas asignaciones realizadas
+    let nuevasAsignaciones = []; 
 
     // Recorremos los egresados que no tienen proyecto
     await Promise.all(

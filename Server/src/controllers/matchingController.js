@@ -23,7 +23,7 @@ async function asignarEgresadosAProyectos() {
     // Recorremos los egresados que no tienen proyecto
     await Promise.all(
       egresadosSinProyecto.map(async (egresado) => {
-        // Filtrar los proyectos que son del mismo curso/tecnología y que tienen espacio disponible
+
         const proyectosDelCurso = proyectosConLugar.filter(
           (proyecto) =>
             proyecto.curso_nombre === egresado.curso_nombre &&

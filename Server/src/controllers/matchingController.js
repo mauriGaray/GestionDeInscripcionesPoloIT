@@ -23,14 +23,12 @@ async function asignarEgresadosAProyectos() {
 
     await Promise.all(
       egresadosSinProyecto.map(async (egresado) => {
-
         const proyectosDelCurso = proyectosConLugar.filter(
           (proyecto) =>
             proyecto.curso_nombre === egresado.curso_nombre &&
             proyecto.cantidad_integrantes < proyecto.tamaño_maximo_equipo
         );
 
-        // Validar si hay proyectos disponibles para el egresado
         if (proyectosDelCurso && proyectosDelCurso.length > 0) {
           // Seleccionamos un proyecto aleatorio de los que tienen lugar
           const proyectoAleatorio =

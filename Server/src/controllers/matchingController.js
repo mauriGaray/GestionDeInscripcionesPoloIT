@@ -30,7 +30,7 @@ async function asignarEgresadosAProyectos() {
         );
 
         if (proyectosDelCurso && proyectosDelCurso.length > 0) {
-          // Seleccionamos un proyecto aleatorio de los que tienen lugar
+
           const proyectoAleatorio =
             proyectosDelCurso[
               Math.floor(Math.random() * proyectosDelCurso.length)
